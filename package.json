@@ -1,7 +1,6 @@
 {
   "name": "simple-home",
   "version": "0.0.1",
-  "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
