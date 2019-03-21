@@ -1,6 +1,6 @@
 # simple-home
 심플한 웹 브라우저 시작페이지  
-[sample](https://codepen.io/leegeunhyeok/pen/qggXQZ) (미완성)
+[sample](https://codepen.io/leegeunhyeok/pen/qggXQZ) By `Geunhyeok LEE`
 
 ## Project setup
 ```
