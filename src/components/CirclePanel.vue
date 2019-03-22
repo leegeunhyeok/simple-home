@@ -1,18 +1,32 @@
 <template>
   <div id="circle-wrap">
     <div id="circle" class="circle-menu" ref="menu">
-
+      <CircleMenuItem
+        v-for="(index, i) in menus"
+        :index="i"
+        :key="i"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import CircleMenuItem from '@/components/CircleMenuItem'
+
 export default {
   name: 'circle-menu',
+  components: {
+    CircleMenuItem
+  },
   props: {
     degree: {
       type: Number,
       required: true
+    }
+  },
+  data () {
+    return {
+      menus: new Array(6)
     }
   },
   watch: {
