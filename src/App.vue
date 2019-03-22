@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import CirclePanel from '@/components/CirclePanel';
+import CirclePanel from '@/components/CirclePanel'
 
 export default {
   name: 'app',
