@@ -8,6 +8,7 @@
 
 <script>
 export default {
+  name: 'circle-menu',
   props: {
     degree: {
       type: Number,
@@ -46,7 +47,9 @@ export default {
   .circle-menu {
     width: 400px;
     height: 400px;
-    background-color: #aaa;
+    background-color: #fff;
+    border-radius: 50%;
+    overflow: hidden;
   }
 }
 </style>
