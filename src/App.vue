@@ -11,8 +11,18 @@ export default {
 </script>
 
 <style lang="scss">
+
+@font-face {
+  font-family: 'NanumSquareRound';
+  src:url('/assets/fonts/NanumSquareRoundR.eot');
+  src:url('/assets/fonts/NanumSquareRoundR.eot#iefix') format('embedded-opentype'),
+  url('/assets/fonts/NanumSquareRoundR.woff') format('woff'),
+  url('/assets/fonts/NanumSquareRoundR.ttf') format('truetype');
+  src:local(¡Ø), url('/assets/fonts/NanumSquareRoundR.woff') format('woff');
+}
+
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'NanumSquareRound', 'Avenir', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
