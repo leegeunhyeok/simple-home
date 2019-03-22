@@ -23,9 +23,9 @@ export default {
     this.speed = 1
   },
   mounted () {
-    this.screenWidth = window.innerWidth 
-        || document.documentElement.clientWidth
-        || document.body.clientWidth
+    this.screenWidth = window.innerWidth ||
+        document.documentElement.clientWidth ||
+        document.body.clientWidth
     this.$refs.app.addEventListener('mousemove', this.changeDegree)
     this.$refs.app.addEventListener('touchmove', this.changeDegree)
   },

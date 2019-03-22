@@ -18,7 +18,7 @@ export default {
   },
   mounted () {
     let rotateDegree = this.index * 60
-    this.$refs.menu.style.transform = `rotate(${ rotateDegree }deg) skew(30deg)`
+    this.$refs.menu.style.transform = `rotate(${rotateDegree}deg) skew(30deg)`
   }
 }
 </script>

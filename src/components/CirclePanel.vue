@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     changeRotateStatus () {
-      this.$refs.menu.style.transform = `rotate(${ this.degree }deg)`
+      this.$refs.menu.style.transform = `rotate(${this.degree}deg)`
     }
   }
 }
@@ -77,7 +77,7 @@ export default {
       box-shadow: 0px 0px 10px rgba(0, 0, 0, .2);
     }
   }
-  
+
   .circle-wrap__pin {
     position: absolute;
     bottom: 175px;
