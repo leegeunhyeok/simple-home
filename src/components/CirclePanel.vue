@@ -24,7 +24,6 @@ export default {
   },
   methods: {
     changeRotateStatus () {
-      console.log(this.degree)
       this.$refs.menu.style.transform = `rotate(${ this.degree }deg)`
     }
   }
