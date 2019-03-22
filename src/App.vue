@@ -21,12 +21,23 @@ export default {
   src:local(¡Ø), url('/assets/fonts/NanumSquareRoundR.woff') format('woff');
 }
 
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
 #app {
   font-family: 'NanumSquareRound', 'Avenir', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  background: linear-gradient(0deg, #74ebd5, #acb6e5);
 }
 </style>
