@@ -7,6 +7,9 @@
         :key="i"
       />
     </div>
+    <div class="circle-wrap__pin">
+
+    </div>
   </div>
 </template>
 
@@ -63,7 +66,26 @@ export default {
     height: 400px;
     background-color: #fff;
     border-radius: 50%;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, .2);
     overflow: hidden;
+    -webkit-transition: box-shadow .3s;
+       -moz-transition: box-shadow .3s;
+         -o-transition: box-shadow .3s;
+            transition: box-shadow .3s;
+
+    &:hover {
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, .2);
+    }
+  }
+  
+  .circle-wrap__pin {
+    position: absolute;
+    bottom: 175px;
+    left: 175px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
   }
 }
 </style>
