@@ -35,6 +35,7 @@ export default {
   watch: {
     degree (newValue) {
       this.changeRotateStatus()
+      this.changeSelectMenu()
     }
   },
   mounted () {
@@ -43,6 +44,9 @@ export default {
   methods: {
     changeRotateStatus () {
       this.$refs.menu.style.transform = `rotate(${this.degree}deg)`
+    },
+    changeSelectMenu () {
+      console.log(this.degree)
     }
   }
 }
