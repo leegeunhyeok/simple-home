@@ -7,9 +7,7 @@
         :key="i"
       />
     </div>
-    <div class="circle-wrap__pin">
-
-    </div>
+    <div class="circle-wrap__pin"></div>
   </div>
 </template>
 
