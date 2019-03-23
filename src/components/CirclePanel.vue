@@ -80,12 +80,12 @@ export default {
 
   .circle-wrap__pin {
     position: absolute;
-    bottom: 175px;
+    bottom: 180px;
     left: 175px;
     border-radius: 50%;
     width: 50px;
     height: 50px;
-    background-color: #fff;
+    background-color: dodgerblue;
   }
 }
 </style>

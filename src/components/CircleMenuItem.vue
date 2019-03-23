@@ -27,7 +27,7 @@ export default {
 
 .circle-menu-item {
   position: absolute;
-  background-color: dodgerblue;
+  background-color: #fff;
   width: 200px;
   height: 200px;
   transform-origin: 100% 100%;
