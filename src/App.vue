@@ -23,16 +23,17 @@ export default {
     this.speed = 1
   },
   mounted () {
-    this.screenWidth = window.innerWidth ||
+    let screenWidth = window.innerWidth ||
         document.documentElement.clientWidth ||
         document.body.clientWidth
+    this.$store.commit('SET_WIDTH', screenWidth)
     this.$refs.app.addEventListener('mousemove', this.changeDegree)
     this.$refs.app.addEventListener('touchmove', this.changeDegree)
   },
   methods: {
     changeDegree (event) {
       let x = event.clientX
-      let percent = x / (this.screenWidth / 2)
+      let percent = x / (this.$store.state.screenWidth / 2)
       this.degree = 360 * percent * (this.speed * 0.5)
     }
   }
