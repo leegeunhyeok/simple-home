@@ -20,21 +20,24 @@ export default {
     }
   },
   created () {
-    this.speed = 1
+    this.speed = 2
   },
   mounted () {
-    let screenWidth = window.innerWidth ||
-        document.documentElement.clientWidth ||
-        document.body.clientWidth
-    this.$store.commit('SET_WIDTH', screenWidth)
+    this.setScreenWidth()
+    window.addEventListener('resize', this.setScreenWidth)
     this.$refs.app.addEventListener('mousemove', this.changeDegree)
     this.$refs.app.addEventListener('touchmove', this.changeDegree)
   },
   methods: {
+    setScreenWidth () {
+      let screenWidth = window.innerWidth ||
+        document.documentElement.clientWidth ||
+        document.body.clientWidth
+      this.$store.commit('SET_WIDTH', screenWidth)
+    },
     changeDegree (event) {
       let x = event.clientX
-      let percent = x / (this.$store.state.screenWidth / 2)
-      this.degree = 360 * percent * (this.speed * 0.5)
+      this.degree = x / (this.$store.state.screenWidth / this.speed) * 360
     }
   }
 }
