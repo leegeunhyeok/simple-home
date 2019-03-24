@@ -4,6 +4,7 @@
       <CircleMenuItem
         v-for="(index, i) in menus"
         :index="i"
+        :currentIndex="currentIndex"
         :key="i"
       />
     </div>
@@ -27,7 +28,8 @@ export default {
   },
   data () {
     return {
-      menus: new Array(6)
+      menus: new Array(6),
+      currentIndex: 0
     }
   },
   watch: {
@@ -44,7 +46,9 @@ export default {
       this.$refs.menu.style.transform = `rotate(${this.degree}deg)`
     },
     changeSelectMenu () {
-      console.log(this.degree)
+      let index = parseInt(this.degree / 60)
+      let rotateCount = parseInt(index / 6)
+      this.currentIndex = index - 6 * rotateCount
     }
   }
 }
