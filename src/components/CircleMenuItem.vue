@@ -1,6 +1,8 @@
 <template>
-  <div class="circle-menu-item" ref="menu">
-
+  <div class="circle-menu-item" ref="menu"
+    :class="{ active: isActive }"
+  >
+    {{ index }}
   </div>
 </template>
 
@@ -11,14 +13,31 @@ export default {
     index: {
       type: Number,
       required: true
+    },
+    currentIndex: {
+      type: Number,
+      required: true
     }
   },
-  created () {
-    console.log(this.index)
+  data () {
+    return {
+      isActive: false
+    }
+  },
+  watch: {
+    currentIndex () {
+      this.activateCheck()
+    }
   },
   mounted () {
     let rotateDegree = this.index * 60
     this.$refs.menu.style.transform = `rotate(${rotateDegree}deg) skew(30deg)`
+    this.activateCheck()
+  },
+  methods: {
+    activateCheck () {
+      this.isActive = this.index === this.currentIndex
+    }
   }
 }
 </script>
@@ -37,5 +56,9 @@ export default {
      -moz-transition: .3s;
        -o-transition: .3s;
           transition: .3s;
+
+  &.active {
+    background-color: #ccc;
+  }
 }
 </style>
