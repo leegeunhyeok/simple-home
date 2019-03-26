@@ -46,9 +46,13 @@ export default {
       this.$refs.menu.style.transform = `rotate(${this.degree}deg)`
     },
     changeSelectMenu () {
-      let index = parseInt(this.degree / 60)
-      let rotateCount = parseInt(index / 6)
-      this.currentIndex = index - 6 * rotateCount
+      let rotateCount = parseInt((this.degree / 60) / 6)
+      let index = 1 - parseInt((this.degree + 30) / 60)
+      index += 6 * (rotateCount + 1)
+      if (index >= 6) {
+        index -= 6
+      }
+      this.currentIndex = index
     }
   }
 }
