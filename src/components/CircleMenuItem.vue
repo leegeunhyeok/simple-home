@@ -2,11 +2,13 @@
   <div class="circle-menu-item" ref="menu"
     :class="{ active: isActive }"
   >
-    {{ index }}
+    {{ getMenuData.text }}
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'circle-menu-item',
   props: {
@@ -21,9 +23,12 @@ export default {
     }
   },
   computed: {
-    currentIndex () {
-      return this.$store.state.selectedMenuIndex
-    }
+    getMenuData () {
+      return this.$store.state.userData.menu[this.index]
+    },
+    ...mapState({
+      currentIndex: state => state.selectedMenuIndex
+    })
   },
   watch: {
     currentIndex () {
