@@ -2,12 +2,48 @@
 const _VERSION = 'v1'
 const DEFAULT_DATA = {
   menu: [
-    { text: 'Picture' },
-    { text: 'Home' },
-    { text: 'Google' },
-    { text: 'Youtube' },
-    { text: 'Setting' },
-    { text: 'Facebook' }
+    {
+      text: 'Picture',
+      icon: {
+        type: 'fas',
+        name: 'image'
+      }
+    },
+    {
+      text: 'Home',
+      icon: {
+        type: 'fas',
+        name: 'home'
+      }
+    },
+    {
+      text: 'Google',
+      icon: {
+        type: 'fab',
+        name: 'google'
+      }
+    },
+    {
+      text: 'Youtube',
+      icon: {
+        type: 'fab',
+        name: 'youtube'
+      }
+    },
+    {
+      text: 'Setting',
+      icon: {
+        type: 'fas',
+        name: 'cog'
+      }
+    },
+    {
+      text: 'Facebook',
+      icon: {
+        type: 'fab',
+        name: 'facebook'
+      }
+    }
   ]
 }
 
