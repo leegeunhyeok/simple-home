@@ -28,6 +28,7 @@ export default {
   mounted () {
     this.setScreenWidth()
     window.addEventListener('resize', this.setScreenWidth)
+    window.addEventListener('click', this.activeSelectedMenu)
     this.$refs.app.addEventListener('mousemove', this.changeDegree)
     this.$refs.app.addEventListener('touchmove', this.changeDegree)
   },
@@ -41,6 +42,9 @@ export default {
     changeDegree (event) {
       let x = event.clientX
       this.degree = x / (this.$store.state.screenWidth / this.speed) * 360
+    },
+    activeSelectedMenu () {
+      alert(this.$store.state.selectedMenuIndex)
     }
   }
 }
