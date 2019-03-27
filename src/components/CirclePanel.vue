@@ -1,15 +1,17 @@
 <template>
-  <div id="circle-wrap">
-    <div id="circle" class="circle-menu" ref="menu">
-      <CircleMenuItem
-        v-for="(index, i) in menus"
-        @onColorChange="changePinColor"
-        :index="i"
-        :key="i"
-      />
+  <transition name="slide" mode="out-in">
+    <div id="circle-wrap">
+      <div id="circle" class="circle-menu" ref="menu">
+        <CircleMenuItem
+          v-for="(index, i) in menus"
+          @onColorChange="changePinColor"
+          :index="i"
+          :key="i"
+        />
+      </div>
+      <div class="circle-wrap__pin" :style="pinStyle"></div>
     </div>
-    <div class="circle-wrap__pin" :style="pinStyle"></div>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -118,5 +120,17 @@ export default {
          -o-transition: background-color .3s;
             transition: background-color .3s;
   }
+}
+
+.slide-enter-active, .slide-leave-active {
+  transition: .5s;
+}
+
+.slide-enter, .slide-leave-to {
+  -webkit-transform: translate(-50%, 300px) !important;
+     -moz-transform: translate(-50%, 300px) !important;
+       -o-transform: translate(-50%, 300px) !important;
+          transform: translate(-50%, 300px) !important;
+  opacity: 0;
 }
 </style>

@@ -1,28 +1,33 @@
 <template>
-  <div id="app" ref="app">
-    <ClockView/>
-    <CirclePanel :degree="degree"/>
-  </div>
+  <transition name="slide" mode="out-in">
+    <div id="app" ref="app">
+      <ClockView/>
+      <SettingModal v-if="modalShow"/>
+      <CirclePanel v-else :degree="degree"/>
+    </div>
+  </transition>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 import ClockView from '@/components/ClockView'
 import CirclePanel from '@/components/CirclePanel'
+import SettingModal from '@/components/SettingModal'
 import Icons from '@/model/icons.json'
 
 export default {
   name: 'app',
   components: {
     ClockView,
-    CirclePanel
+    CirclePanel,
+    SettingModal
   },
   data () {
     return {
       speed: 1,
       screenWidth: 0,
       degree: 0,
-      icons: Icons['brand']
+      modalShow: false
     }
   },
   computed: {
@@ -58,7 +63,7 @@ export default {
       if (action.type === 'url') {
         location.href = action.url
       } else if (action.type === 'setting') {
-        alert('Setting!')
+        this.modalShow = true
       }
     }
   }
