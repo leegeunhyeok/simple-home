@@ -30,7 +30,8 @@ import {
   faTerminal,
   faDatabase,
   faBaby,
-  faLock
+  faLock,
+  faCog
 } from '@fortawesome/free-solid-svg-icons'
 
 import {
@@ -85,6 +86,7 @@ library.add([
   faDatabase,
   faBaby,
   faLock,
+  faCog,
   faGithub,
   faGitlab,
   faFacebook,
