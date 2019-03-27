@@ -26,21 +26,24 @@ export default {
     }
   },
   created () {
+    this.updateTime()
     this.expected = Date.now() + 1000
     setTimeout(this.timer, 1000)
   },
   methods: {
     timer () {
       let currentTime = Date.now()
+      this.updateTime()
+      let deltaTime = currentTime - this.expected
+      this.expected += 1000
+      setTimeout(this.timer, Math.max(0, 1000 - deltaTime))
+    },
+    updateTime () {
       let currentDate = new Date()
 
       this.hour = this.paddingZero(currentDate.getHours())
       this.minute = this.paddingZero(currentDate.getMinutes())
       this.second = this.paddingZero(currentDate.getSeconds())
-
-      let deltaTime = currentTime - this.expected
-      this.expected += 1000
-      setTimeout(this.timer, Math.max(0, 1000 - deltaTime))
     },
     paddingZero (number) {
       if (number.toString().length === 2) {
