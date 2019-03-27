@@ -2,6 +2,7 @@
   <div id="app" ref="app">
     <ClockView/>
     <CirclePanel :degree="degree"/>
+    <font-awesome-icon :icon="['fab', 'github']"/>
   </div>
 </template>
 

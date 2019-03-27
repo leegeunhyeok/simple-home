@@ -108,7 +108,7 @@ library.add([
   faSkype,
   faSlack
 ])
-Vue.component('fa-icon', FontAwesomeIcon)
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false
 

@@ -1,0 +1,198 @@
+{
+  "solid": [
+    {
+      "type": "fas",
+      "name": "user"
+    },
+    {
+      "type": "fas",
+      "name": "user-shield"
+    },
+    {
+      "type": "fas",
+      "name": "home"
+    },
+    {
+      "type": "fas",
+      "name": "music"
+    },
+    {
+      "type": "fas",
+      "name": "play"
+    },
+    {
+      "type": "fas",
+      "name": "play-circle"
+    },
+    {
+      "type": "fas",
+      "name": "cat"
+    },
+    {
+      "type": "fas",
+      "name": "dog"
+    },
+    {
+      "type": "fas",
+      "name": "location-arrow"
+    },
+    {
+      "type": "fas",
+      "name": "map-marked-alt"
+    },
+    {
+      "type": "fas",
+      "name": "globe-americas"
+    },
+    {
+      "type": "fas",
+      "name": "globe"
+    },
+    {
+      "type": "fas",
+      "name": "sticky-note"
+    },
+    {
+      "type": "fas",
+      "name": "image"
+    },
+    {
+      "type": "fas",
+      "name": "camera"
+    },
+    {
+      "type": "fas",
+      "name": "building"
+    },
+    {
+      "type": "fas",
+      "name": "school"
+    },
+    {
+      "type": "fas",
+      "name": "bookmark"
+    },
+    {
+      "type": "fas",
+      "name": "book-open"
+    },
+    {
+      "type": "fas",
+      "name": "eye"
+    },
+    {
+      "type": "fas",
+      "name": "utensils"
+    },
+    {
+      "type": "fas",
+      "name": "user-friends"
+    },
+    {
+      "type": "fas",
+      "name": "code"
+    },
+    {
+      "type": "fas",
+      "name": "terminal"
+    },
+    {
+      "type": "fas",
+      "name": "database"
+    },
+    {
+      "type": "fas",
+      "name": "baby"
+    },
+    {
+      "type": "fas",
+      "name": "lock"
+    },
+    {
+      "type": "fas",
+      "name": "cog"
+    }
+  ],
+  "brand": [
+    {
+      "type": "fab",
+      "name": "github"
+    },
+    {
+      "type": "fab",
+      "name": "gitlab"
+    },
+    {
+      "type": "fab",
+      "name": "facebook"
+    },
+    {
+      "type": "fab",
+      "name": "facebook-massenger"
+    },
+    {
+      "type": "fab",
+      "name": "twitter"
+    },
+    {
+      "type": "fab",
+      "name": "google"
+    },
+    {
+      "type": "fab",
+      "name": "youtube"
+    },
+    {
+      "type": "fab",
+      "name": "twitch"
+    },
+    {
+      "type": "fab",
+      "name": "instagram"
+    },
+    {
+      "type": "fab",
+      "name": "apple"
+    },
+    {
+      "type": "fab",
+      "name": "blogger"
+    },
+    {
+      "type": "fab",
+      "name": "android"
+    },
+    {
+      "type": "fab",
+      "name": "js"
+    },
+    {
+      "type": "fab",
+      "name": "linux"
+    },
+    {
+      "type": "fab",
+      "name": "steam"
+    },
+    {
+      "type": "fab",
+      "name": "stack-overflow"
+    },
+    {
+      "type": "fab",
+      "name": "reddit"
+    },
+    {
+      "type": "fab",
+      "name": "telegram"
+    },
+    {
+      "type": "fab",
+      "name": "skype"
+    },
+    {
+      "type": "fab",
+      "name": "slack"
+    }
+  ]
+}

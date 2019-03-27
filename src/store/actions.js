@@ -2,12 +2,12 @@
 const _VERSION = 'v1'
 const DEFAULT_DATA = {
   menu: [
-    { text: 'a' },
-    { text: 'b' },
-    { text: 'c' },
-    { text: 'd' },
-    { text: 'e' },
-    { text: 'f' }
+    { text: 'Picture' },
+    { text: 'Home' },
+    { text: 'Google' },
+    { text: 'Youtube' },
+    { text: 'Setting' },
+    { text: 'Facebook' }
   ]
 }
 
