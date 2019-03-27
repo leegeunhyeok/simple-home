@@ -8,7 +8,10 @@
           </span>
         </div>
         <div class="modal__panel__content">
-          
+          <div class="controll_area">
+            <div class="checkbox" :class="{ checked: timeFormat === '12' }"></div>
+            <label style="margin: 0px;" @click="changeTimeFormat"></label>
+          </div>
         </div>
       </div>
     </div>
@@ -16,18 +19,44 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'setting-modal',
+  computed: {
+    timeFormat () {
+      // TODO: Vuex object value change issue
+      return this.$store.getters.userOption.timeFormat
+    }
+  },
   methods: {
     onCloseModal (event) {
       event.stopPropagation()
       this.$emit('onCloseModal')
+    },
+    changeTimeFormat(event) {
+      event.stopPropagation()
+      if (this.timeFormat === '24') {
+        this.$store.commit('SET_OPTION', {
+          key: 'timeFormat',
+          value: '12'
+        })
+      } else {
+        this.$store.commit('SET_OPTION', {
+          key: 'timeFormat',
+          value: '24'
+        })
+      }
+      this.$store.dispatch('SET_USER_DATA')
+      console.log(this.timeFormat)
     }
   }
 }
 </script>
 
 <style lang="scss">
+@import '@/common/checkbox.scss';
+
 #setting-modal {
   width: 100%;
   height: 100%;
@@ -72,6 +101,10 @@ export default {
 
     .modal__panel__content {
       padding: 10px;
+
+      .controll_area {
+        margin: 10px 0;
+      }
     }
   }
 }

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import actions from './actions'
+import getters from './getters'
 import mutations from './mutations'
 
 Vue.use(Vuex)
@@ -11,6 +12,7 @@ export default new Vuex.Store({
     screenWidth: 0,
     selectedMenuIndex: 0
   },
+  getters,
   mutations,
   actions
 })

@@ -2,6 +2,11 @@
 const _VERSION = 'v1'
 const DEFAULT_DATA = {
   option: {
+    timeFormat: '24',
+    apm: true,
+    date: true,
+    showAlt: true,
+    newTab: false,
     pin: null,
     default: {
       color: '#555',
