@@ -4,7 +4,7 @@
       <div class="modal__panel">
         <div class="modal__panel__header">
           <span class="modal__panel__header__close"
-            @click="onCloseModal">
+            @click.self="onCloseModal">
           </span>
         </div>
         <div class="modal__panel__content">
@@ -20,9 +20,7 @@ export default {
   name: 'setting-modal',
   methods: {
     onCloseModal (event) {
-      // TODO: Bubbling fix
-      console.log(event)
-      event.preventDefault()
+      event.stopPropagation()
       this.$emit('onCloseModal')
     }
   }
@@ -54,6 +52,7 @@ export default {
       .modal__panel__header__close {
         cursor: pointer;
         position: absolute;
+        display: block;
         top: 5px;
         right: 5px;
         width: 20px;
