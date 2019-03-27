@@ -23,6 +23,7 @@ export default {
     }
   },
   created () {
+    this.$store.dispatch('GET_USER_DATA')
     this.speed = 2
   },
   mounted () {
