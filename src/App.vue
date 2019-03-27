@@ -2,13 +2,13 @@
   <div id="app" ref="app">
     <ClockView/>
     <CirclePanel :degree="degree"/>
-    <font-awesome-icon :icon="['fab', 'github']"/>
   </div>
 </template>
 
 <script>
 import ClockView from '@/components/ClockView'
 import CirclePanel from '@/components/CirclePanel'
+import Icons from '@/model/icons.json'
 
 export default {
   name: 'app',
@@ -20,7 +20,8 @@ export default {
     return {
       speed: 1,
       screenWidth: 0,
-      degree: 0
+      degree: 0,
+      icons: Icons['brand']
     }
   },
   created () {
