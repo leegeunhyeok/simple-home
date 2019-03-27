@@ -2,7 +2,9 @@
   <div class="circle-menu-item" ref="menu"
     :class="{ active: isActive }"
   >
-    {{ getMenuData.text }}
+    <font-awesome-icon class="circle-menu-item__icon"
+      :icon="[menuData.icon.type, menuData.icon.name]"
+    />
   </div>
 </template>
 
@@ -23,7 +25,7 @@ export default {
     }
   },
   computed: {
-    getMenuData () {
+    menuData () {
       return this.$store.state.userData.menu[this.index]
     },
     ...mapState({
@@ -65,6 +67,12 @@ export default {
 
   &.active {
     background-color: #ccc;
+  }
+
+  .circle-menu-item__icon {
+    margin: 0px 0 10px 20px;
+    font-size: 3rem;
+    transform: skew(-30deg) rotate(-60deg);
   }
 }
 </style>
