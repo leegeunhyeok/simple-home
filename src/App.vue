@@ -1,6 +1,6 @@
 <template>
   <div id="app" ref="app">
-    <ClockView/>>
+    <ClockView/>
     <CirclePanel :degree="degree"/>
   </div>
 </template>
