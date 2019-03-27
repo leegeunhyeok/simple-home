@@ -60,8 +60,11 @@ export default {
 #clock-panel {
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);
   margin-top: 180px;
+  -webkit-transform: translateX(-50%);
+     -moz-transform: translateX(-50%);
+       -o-transform: translateX(-50%);
+          transform: translateX(-50%);
 
   .time {
     float: left;
