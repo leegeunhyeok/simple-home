@@ -1,6 +1,6 @@
 <template>
   <div class="circle-menu-item" ref="menu"
-    :class="{ active: isActive }"
+    :style="currentStyle"
   >
     <font-awesome-icon class="circle-menu-item__icon"
       :icon="[menuData.icon.type, menuData.icon.name]"
@@ -21,7 +21,15 @@ export default {
   },
   data () {
     return {
-      isActive: false
+      defaultStyle: {
+        backgroundColor: '#fff',
+        color: '#000'
+      },
+      activeStyle: {
+        backgroundColor: '#eee',
+        color: 'dodgerblue'
+      },
+      currentStyle: {}
     }
   },
   computed: {
@@ -37,6 +45,9 @@ export default {
       this.activateCheck()
     }
   },
+  created () {
+    this.currentStyle = this.defaultStyle
+  },
   mounted () {
     let rotateDegree = this.index * 60
     this.$refs.menu.style.transform = `rotate(${rotateDegree}deg) skew(30deg)`
@@ -44,7 +55,11 @@ export default {
   },
   methods: {
     activateCheck () {
-      this.isActive = this.index === this.currentIndex
+      if (this.index === this.currentIndex) {
+        this.currentStyle = this.activeStyle
+      } else {
+        this.currentStyle = this.defaultStyle
+      }
     }
   }
 }
@@ -64,10 +79,6 @@ export default {
      -moz-transition: .3s;
        -o-transition: .3s;
           transition: .3s;
-
-  &.active {
-    background-color: #ccc;
-  }
 
   .circle-menu-item__icon {
     margin: 0px 0 10px 20px;
