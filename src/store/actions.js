@@ -18,6 +18,10 @@ const DEFAULT_DATA = {
         type: 'fas',
         name: 'image',
         color: '#2e8b57'
+      },
+      action: {
+        type: 'url',
+        url: 'https://www.pinterest.co.kr'
       }
     },
     {
@@ -26,6 +30,10 @@ const DEFAULT_DATA = {
         type: 'fas',
         name: 'home',
         color: 'dodgerblue'
+      },
+      action: {
+        type: 'url',
+        url: 'https://www.naver.com'
       }
     },
     {
@@ -34,6 +42,10 @@ const DEFAULT_DATA = {
         type: 'fab',
         name: 'google',
         color: '#f9d71c'
+      },
+      action: {
+        type: 'url',
+        url: 'https://www.google.com'
       }
     },
     {
@@ -42,6 +54,10 @@ const DEFAULT_DATA = {
         type: 'fab',
         name: 'youtube',
         color: '#ff0000'
+      },
+      action: {
+        type: 'url',
+        url: 'https://www.youtube.com'
       }
     },
     {
@@ -50,6 +66,9 @@ const DEFAULT_DATA = {
         type: 'fas',
         name: 'cog',
         color: '#7851a9'
+      },
+      action: {
+        type: 'setting'
       }
     },
     {
@@ -58,6 +77,10 @@ const DEFAULT_DATA = {
         type: 'fab',
         name: 'facebook',
         color: '#3b5998'
+      },
+      action: {
+        type: 'url',
+        url: 'https://facebook.com'
       }
     }
   ]

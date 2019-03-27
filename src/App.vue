@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import ClockView from '@/components/ClockView'
 import CirclePanel from '@/components/CirclePanel'
 import Icons from '@/model/icons.json'
@@ -23,6 +24,12 @@ export default {
       degree: 0,
       icons: Icons['brand']
     }
+  },
+  computed: {
+    ...mapState({
+      userData: state => state.userData,
+      currentIndex: state => state.selectedMenuIndex
+    })
   },
   created () {
     this.$store.dispatch('GET_USER_DATA')
@@ -47,7 +54,12 @@ export default {
       this.degree = x / (this.$store.state.screenWidth / this.speed) * 360
     },
     activeSelectedMenu () {
-      alert(this.$store.state.selectedMenuIndex)
+      let action = this.userData.menu[this.currentIndex].action
+      if (action.type === 'url') {
+        location.href = action.url
+      } else if (action.type === 'setting') {
+        alert('Setting!')
+      }
     }
   }
 }
