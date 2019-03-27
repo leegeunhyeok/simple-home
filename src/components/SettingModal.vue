@@ -3,7 +3,9 @@
     <div id="setting-modal">
       <div class="modal__panel">
         <div class="modal__panel__header">
-          <span class="modal__panel__header__close"></span>
+          <span class="modal__panel__header__close"
+            @click="onCloseModal">
+          </span>
         </div>
         <div class="modal__panel__content">
           
@@ -15,7 +17,15 @@
 
 <script>
 export default {
-  name: 'setting-modal'
+  name: 'setting-modal',
+  methods: {
+    onCloseModal (event) {
+      // TODO: Bubbling fix
+      console.log(event)
+      event.preventDefault()
+      this.$emit('onCloseModal')
+    }
+  }
 }
 </script>
 

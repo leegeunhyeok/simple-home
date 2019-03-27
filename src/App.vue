@@ -2,7 +2,7 @@
   <transition name="slide" mode="out-in">
     <div id="app" ref="app">
       <ClockView/>
-      <SettingModal v-if="modalShow"/>
+      <SettingModal v-if="modalShow" @onCloseModal="modalShow = false"/>
       <CirclePanel v-else :degree="degree"/>
     </div>
   </transition>
@@ -43,7 +43,7 @@ export default {
   mounted () {
     this.setScreenWidth()
     window.addEventListener('resize', this.setScreenWidth)
-    window.addEventListener('click', this.activeSelectedMenu)
+    this.$refs.app.addEventListener('click', this.activeSelectedMenu)
     this.$refs.app.addEventListener('mousemove', this.changeDegree)
     this.$refs.app.addEventListener('touchmove', this.changeDegree)
   },
@@ -59,6 +59,7 @@ export default {
       this.degree = x / (this.$store.state.screenWidth / this.speed) * 360
     },
     activeSelectedMenu () {
+      console.log('click!')
       let action = this.userData.menu[this.currentIndex].action
       if (action.type === 'url') {
         location.href = action.url
