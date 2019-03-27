@@ -37,6 +37,7 @@ export default {
       return this.$store.state.userData.menu[this.index]
     },
     ...mapState({
+      userData: state => state.userData,
       currentIndex: state => state.selectedMenuIndex
     })
   },
@@ -46,6 +47,8 @@ export default {
     }
   },
   created () {
+    this.defaultStyle = this.userData.option['default']
+    this.activeStyle = this.userData.option['active']
     this.currentStyle = this.defaultStyle
   },
   mounted () {

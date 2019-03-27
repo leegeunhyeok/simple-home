@@ -7,11 +7,12 @@
         :key="i"
       />
     </div>
-    <div class="circle-wrap__pin"></div>
+    <div class="circle-wrap__pin" :style="pinStyle"></div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import CircleMenuItem from '@/components/CircleMenuItem'
 
 export default {
@@ -28,8 +29,16 @@ export default {
   data () {
     return {
       menus: new Array(6),
-      currentIndex: 0
+      currentIndex: 0,
+      pinStyle: {
+        backgroundColor: 'dodgerblue'
+      }
     }
+  },
+  computed: {
+    ...mapState({
+      userData: state => state.userData
+    })
   },
   watch: {
     degree (newValue) {
@@ -39,6 +48,9 @@ export default {
     currentIndex (newValue) {
       this.$store.commit('SET_SELECTED_MENU', newValue)
     }
+  },
+  created () {
+    this.pinStyle['backgroundColor'] = this.userData.option['pin']
   },
   mounted () {
     this.changeRotateStatus()
@@ -97,7 +109,6 @@ export default {
     border-radius: 50%;
     width: 50px;
     height: 50px;
-    background-color: dodgerblue;
   }
 }
 </style>

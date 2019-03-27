@@ -1,6 +1,17 @@
 
 const _VERSION = 'v1'
 const DEFAULT_DATA = {
+  option: {
+    pin: 'dodgerblue',
+    default: {
+      color: '#555',
+      backgroundColor: '#fff'
+    },
+    active: {
+      color: 'dodgerblue',
+      backgroundColor: '#eee'
+    }
+  },
   menu: [
     {
       text: 'Picture',
