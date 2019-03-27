@@ -57,11 +57,11 @@ export default {
 
 @font-face {
   font-family: 'NanumSquareRound';
-  src:url('/assets/fonts/NanumSquareRoundR.eot');
-  src:url('/assets/fonts/NanumSquareRoundR.eot#iefix') format('embedded-opentype'),
-  url('/assets/fonts/NanumSquareRoundR.woff') format('woff'),
-  url('/assets/fonts/NanumSquareRoundR.ttf') format('truetype');
-  src:local(¡Ø), url('/assets/fonts/NanumSquareRoundR.woff') format('woff');
+  src:url('assets/fonts/NanumSquareRoundR.eot');
+  src:url('assets/fonts/NanumSquareRoundR.eot#iefix') format('embedded-opentype'),
+      url('assets/fonts/NanumSquareRoundR.woff') format('woff'),
+      url('assets/fonts/NanumSquareRoundR.ttf') format('truetype');
+  src:local(¡Ø), url('assets/fonts/NanumSquareRoundR.woff') format('woff');
 }
 
 * {
@@ -78,7 +78,7 @@ html, body {
 
 #app {
   position: relative;
-  font-family: 'NanumSquareRound', 'Avenir', sans-serif;
+  font-family: 'NanumSquareRound';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   width: 100%;
