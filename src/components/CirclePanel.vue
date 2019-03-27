@@ -3,6 +3,7 @@
     <div id="circle" class="circle-menu" ref="menu">
       <CircleMenuItem
         v-for="(index, i) in menus"
+        @onColorChange="changePinColor"
         :index="i"
         :key="i"
       />
@@ -50,7 +51,7 @@ export default {
     }
   },
   created () {
-    this.pinStyle['backgroundColor'] = this.userData.option['pin']
+    this.pinStyle.backgroundColor = this.userData.option.pin
   },
   mounted () {
     this.changeRotateStatus()
@@ -67,6 +68,9 @@ export default {
         index -= 6
       }
       this.currentIndex = index
+    },
+    changePinColor (color) {
+      this.pinStyle.backgroundColor = color
     }
   }
 }
@@ -109,6 +113,10 @@ export default {
     border-radius: 50%;
     width: 50px;
     height: 50px;
+    -webkit-transition: background-color .3s;
+       -moz-transition: background-color .3s;
+         -o-transition: background-color .3s;
+            transition: background-color .3s;
   }
 }
 </style>

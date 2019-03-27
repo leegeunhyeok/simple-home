@@ -60,6 +60,11 @@ export default {
     activateCheck () {
       if (this.index === this.currentIndex) {
         this.currentStyle = this.activeStyle
+        this.currentStyle.color = this.menuData.icon.color
+
+        if (!this.userData.option.pin) {
+          this.$emit('onColorChange', this.menuData.icon.color)
+        }
       } else {
         this.currentStyle = this.defaultStyle
       }

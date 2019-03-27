@@ -2,13 +2,12 @@
 const _VERSION = 'v1'
 const DEFAULT_DATA = {
   option: {
-    pin: 'dodgerblue',
+    pin: null,
     default: {
       color: '#555',
       backgroundColor: '#fff'
     },
     active: {
-      color: 'dodgerblue',
       backgroundColor: '#eee'
     }
   },
@@ -17,42 +16,48 @@ const DEFAULT_DATA = {
       text: 'Picture',
       icon: {
         type: 'fas',
-        name: 'image'
+        name: 'image',
+        color: '#2e8b57'
       }
     },
     {
       text: 'Home',
       icon: {
         type: 'fas',
-        name: 'home'
+        name: 'home',
+        color: 'dodgerblue'
       }
     },
     {
       text: 'Google',
       icon: {
         type: 'fab',
-        name: 'google'
+        name: 'google',
+        color: '#f9d71c'
       }
     },
     {
       text: 'Youtube',
       icon: {
         type: 'fab',
-        name: 'youtube'
+        name: 'youtube',
+        color: '#ff0000'
       }
     },
     {
       text: 'Setting',
       icon: {
         type: 'fas',
-        name: 'cog'
+        name: 'cog',
+        color: '#7851a9'
       }
     },
     {
       text: 'Facebook',
       icon: {
         type: 'fab',
-        name: 'facebook'
+        name: 'facebook',
+        color: '#3b5998'
       }
     }
   ]
