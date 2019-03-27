@@ -13,15 +13,16 @@ export default {
     index: {
       type: Number,
       required: true
-    },
-    currentIndex: {
-      type: Number,
-      required: true
     }
   },
   data () {
     return {
       isActive: false
+    }
+  },
+  computed: {
+    currentIndex () {
+      return this.$store.state.selectedMenuIndex
     }
   },
   watch: {

@@ -4,7 +4,6 @@
       <CircleMenuItem
         v-for="(index, i) in menus"
         :index="i"
-        :currentIndex="currentIndex"
         :key="i"
       />
     </div>
@@ -36,6 +35,9 @@ export default {
     degree (newValue) {
       this.changeRotateStatus()
       this.changeSelectMenu()
+    },
+    currentIndex (newValue) {
+      this.$store.commit('SET_SELECTED_MENU', newValue)
     }
   },
   mounted () {
