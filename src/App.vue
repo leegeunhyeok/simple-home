@@ -1,15 +1,18 @@
 <template>
   <div id="app" ref="app">
+    <ClockView/>>
     <CirclePanel :degree="degree"/>
   </div>
 </template>
 
 <script>
+import ClockView from '@/components/ClockView'
 import CirclePanel from '@/components/CirclePanel'
 
 export default {
   name: 'app',
   components: {
+    ClockView,
     CirclePanel
   },
   data () {
