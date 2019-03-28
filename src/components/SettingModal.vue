@@ -8,9 +8,99 @@
           </span>
         </div>
         <div class="modal__panel__content">
+          <div class="modal__panel__content--header">기본 설정</div>
           <div class="controll_area">
-            <div class="checkbox" :class="{ checked: timeFormat === '12' }"></div>
-            <label style="margin: 0px;" @click="changeTimeFormat"></label>
+            <div class="controll_area__text">
+              <div class="controll_area__text--title">시간 포맷</div>
+              12시간 형식을 사용합니다
+            </div>
+            <div class="controll_area__switch">
+              <div class="checkbox" :class="{ checked: timeFormatCheck }"></div>
+              <label style="margin: 0px;" @click="changeTimeFormat"></label>
+            </div>
+          </div>
+          <div class="controll_area">
+            <div class="controll_area__text">
+              <div class="controll_area__text--title">오전/오후</div>
+              오전, 오후 문구를 시간 옆에 표시합니다
+            </div>
+            <div class="controll_area__switch">
+              <div class="checkbox" :class="{ checked: apm }"></div>
+              <label style="margin: 0px;" @click="apm = !apm"></label>
+            </div>
+          </div>
+          <div class="controll_area">
+            <div class="controll_area__text">
+              <div class="controll_area__text--title">날짜</div>
+              현재 날짜를 표시합니다
+            </div>
+            <div class="controll_area__switch">
+              <div class="checkbox" :class="{ checked: date }"></div>
+              <label style="margin: 0px;" @click="date = !date"></label>
+            </div>
+          </div>
+          <div class="controll_area">
+            <div class="controll_area__text">
+              <div class="controll_area__text--title">메뉴 미리보기</div>
+              선택된 메뉴의 미리보기 텍스트를 표시합니다
+            </div>
+            <div class="controll_area__switch">
+              <div class="checkbox" :class="{ checked: showAlt }"></div>
+              <label style="margin: 0px;" @click="showAlt = !showAlt"></label>
+            </div>
+          </div>
+          <div class="controll_area">
+            <div class="controll_area__text">
+              <div class="controll_area__text--title">새 탭으로 열기</div>
+              메뉴를 통해 링크 이동시 새 탭으로 띄웁니다
+            </div>
+            <div class="controll_area__switch">
+              <div class="checkbox" :class="{ checked: newTab }"></div>
+              <label style="margin: 0px;" @click="newTab = !newTab"></label>
+            </div>
+          </div>
+          <div class="modal__panel__content--header">사용자 설정</div>
+          <div class="controll_area">
+            <div class="controll_area__text">
+              <div class="controll_area__text--title">반응형 핀 색상</div>
+              선택한 메뉴의 색상으로 핀 색상이 변경됩니다
+            </div>
+            <div class="controll_area__switch">
+              <div class="checkbox" :class="{ checked: responsivePinCheck }"></div>
+              <label style="margin: 0px;" @click="changePinOption"></label>
+            </div>
+          </div>
+          <div class="controll_area" v-if="!responsivePinCheck">
+            고정 핀 색상 <input class="input" v-model="pin">
+          </div>
+          <div class="controll_area">
+            <div class="controll_area__text">
+              <div class="controll_area__text--title">메뉴 기본 색상</div>
+              활성화되지 않은 메뉴의 기본 색상 스타일을 지정합니다
+            </div>
+            <div class="controll_area__switch">
+              <div class="checkbox" :class="{ checked: true }"></div>
+              <label style="margin: 0px;" @click="console.log('Default')"></label>
+            </div>
+          </div>
+          <div class="controll_area">
+            <div class="controll_area__text">
+              <div class="controll_area__text--title">메뉴 활성화 색상</div>
+              선택된 메뉴의 색상 스타일을 지정합니다
+            </div>
+            <div class="controll_area__switch">
+              <div class="checkbox" :class="{ checked: true }"></div>
+              <label style="margin: 0px;" @click="console.log('Active')"></label>
+            </div>
+          </div>
+          <div class="controll_area">
+            <div class="controll_area__text">
+              <div class="controll_area__text--title">메뉴 사용자화</div>
+              메뉴 기능, 아이콘, 색상 등 메뉴를 편집합니다
+            </div>
+          </div>
+          <div class="controll_area">
+            Menu customize
           </div>
         </div>
       </div>
@@ -19,36 +109,52 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-
 export default {
   name: 'setting-modal',
-  computed: {
-    timeFormat () {
-      // TODO: Vuex object value change issue
-      return this.$store.getters.userOption.timeFormat
+  data () {
+    return {
+      timeFormat: '24',
+      apm: true,
+      date: true,
+      showAlt: true,
+      newTab: false,
+      pin: null
     }
+  },
+  computed: {
+    timeFormatCheck () {
+      return this.timeFormat === '12'
+    },
+    responsivePinCheck () {
+      return !this.pin
+    }
+  },
+  created () {
+
+  },
+  beforeDestroy () {
+
   },
   methods: {
     onCloseModal (event) {
       event.stopPropagation()
       this.$emit('onCloseModal')
     },
-    changeTimeFormat(event) {
+    changeTimeFormat (event) {
       event.stopPropagation()
       if (this.timeFormat === '24') {
-        this.$store.commit('SET_OPTION', {
-          key: 'timeFormat',
-          value: '12'
-        })
+        this.timeFormat = '12'
       } else {
-        this.$store.commit('SET_OPTION', {
-          key: 'timeFormat',
-          value: '24'
-        })
+        this.timeFormat = '24'
       }
-      this.$store.dispatch('SET_USER_DATA')
-      console.log(this.timeFormat)
+    },
+    changePinOption (event) {
+      event.stopPropagation()
+      if (this.pin === null) {
+        this.pin = '#1e90ff'
+      } else {
+        this.pin = null
+      }
     }
   }
 }
@@ -56,6 +162,7 @@ export default {
 
 <style lang="scss">
 @import '@/common/checkbox.scss';
+@import '@/common/input.scss';
 
 #setting-modal {
   width: 100%;
@@ -69,8 +176,10 @@ export default {
     transform: translate(-50%, -50%);
     width: 50%;
     height: 70%;
+    padding: 0 20px;
     background-color: #fff;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, .5);
+    overflow-y: auto;
 
     .modal__panel__header {
       position: relative;
@@ -83,7 +192,7 @@ export default {
         position: absolute;
         display: block;
         top: 5px;
-        right: 5px;
+        right: -10px;
         width: 20px;
         height: 20px;
         border-radius: 50%;
@@ -102,8 +211,34 @@ export default {
     .modal__panel__content {
       padding: 10px;
 
+      .modal__panel__content--header {
+        font-size: 2rem;
+        font-weight: bold;
+        border-bottom: 2px solid #bbb;
+        padding-bottom: 10px;
+      }
+
       .controll_area {
-        margin: 10px 0;
+        display: block;
+        width: 100%;
+        height: 2rem;
+        margin-top: 10px;
+        margin-bottom: 30px;
+
+        .controll_area__text {
+          float: left;
+          color: #333;
+
+          .controll_area__text--title {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #000;
+          }
+        }
+
+        .controll_area__switch {
+          float: right;
+        }
       }
     }
   }
