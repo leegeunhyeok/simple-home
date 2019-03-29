@@ -142,6 +142,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { Chrome } from 'vue-color'
 
 export default {
@@ -256,10 +257,13 @@ export default {
     },
     responsivePinCheck () {
       return !this.pin
-    }
+    },
+    ...mapState({
+      userData: state => state.userData
+    })
   },
   created () {
-
+    this.loadUserData()
   },
   beforeDestroy () {
     this.saveCurrentOption()
@@ -301,6 +305,23 @@ export default {
         // Responsive pin option
         this.pin = null
       }
+    },
+    loadUserData () {
+      let userData = this.userData
+      this.title = userData.option.title
+      this.timeFormat = userData.option.timeFormat
+      this.clockMargin = userData.option.clockMargin
+      this.apm = userData.option.apm
+      this.date = userData.option.date
+      this.speed = userData.option.speed
+      this.showAlt = userData.option.showAlt
+      this.newTab = userData.option.newTab
+      this.pin.hex = userData.option.pin
+      this.defaultColor.hex = userData.option.default.color
+      this.defaultBackgroundColor.hex = userData.option.default.backgroundColor
+      this.activeColor.hex = userData.option.active.color
+      this.activeBackgroundColor.hex = userData.option.active.backgroundColor
+      this.menu = userData.menu
     },
     saveCurrentOption () {
       let userData = {}
