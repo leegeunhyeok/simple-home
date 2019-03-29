@@ -69,18 +69,27 @@
               <div class="checkbox" :class="{ checked: responsivePinCheck }"></div>
               <label style="margin: 0px;" @click="changePinOption"></label>
             </div>
-          </div>
-          <div class="controll_area" v-if="!responsivePinCheck">
-            고정 핀 색상 <input class="input" v-model="pin">
+            <div class="controll_area__sub_controll" v-if="!responsivePinCheck">
+              <div class="controll_area__sub_controll__area">
+                <span class="title">고정 핀 색상</span>
+                <color-picker v-model="pin"/>
+              </div>
+            </div>
           </div>
           <div class="controll_area">
             <div class="controll_area__text">
               <div class="controll_area__text--title">메뉴 기본 색상</div>
               활성화되지 않은 메뉴의 기본 색상 스타일을 지정합니다
             </div>
-            <div class="controll_area__switch">
-              <div class="checkbox" :class="{ checked: true }"></div>
-              <label style="margin: 0px;" @click="console.log('Default')"></label>
+            <div class="controll_area__sub_controll">
+              <div class="controll_area__sub_controll__area">
+                <span class="title">배경색</span>
+                <color-picker v-model="defaultBackgroundColor"/>
+              </div>
+              <div class="controll_area__sub_controll__area">
+                <span class="title">아이콘색</span>
+                <color-picker v-model="defaultColor"/>
+              </div>
             </div>
           </div>
           <div class="controll_area">
@@ -88,15 +97,21 @@
               <div class="controll_area__text--title">메뉴 활성화 색상</div>
               선택된 메뉴의 색상 스타일을 지정합니다
             </div>
-            <div class="controll_area__switch">
-              <div class="checkbox" :class="{ checked: true }"></div>
-              <label style="margin: 0px;" @click="console.log('Active')"></label>
+            <div class="controll_area__sub_controll">
+              <div class="controll_area__sub_controll__area">
+                <span class="title">배경색</span>
+                <color-picker v-model="activeBackgroundColor"/>
+              </div>
+              <div class="controll_area__sub_controll__area">
+                <span class="title">아이콘색</span>
+                <color-picker v-model="activeColor"/>
+              </div>
             </div>
           </div>
           <div class="controll_area">
             <div class="controll_area__text">
               <div class="controll_area__text--title">메뉴 사용자화</div>
-              메뉴 기능, 아이콘, 색상 등 메뉴를 편집합니다
+              기능, 아이콘, 색상 등 메뉴를 편집합니다
             </div>
           </div>
           <div class="controll_area">
@@ -109,8 +124,13 @@
 </template>
 
 <script>
+import { Chrome } from 'vue-color'
+
 export default {
   name: 'setting-modal',
+  components: {
+    'color-picker': Chrome
+  },
   data () {
     return {
       // Copied user option values (temp)
@@ -119,7 +139,96 @@ export default {
       date: true,
       showAlt: true,
       newTab: false,
-      pin: null
+      pin: {
+        hex: '#1e90ff'
+      },
+      speed: 2,
+      title: 'Simple Home 🏠',
+      defaultColor: {
+        hex: '#555555'
+      },
+      defaultBackgroundColor: {
+        hex: '#ffffff'
+      },
+      activeColor: {
+        hex: '#555555'
+      },
+      activeBackgroundColor: {
+        hex: '#eeeeee'
+      },
+      menu: [
+        {
+          text: 'Picture',
+          icon: {
+            type: 'fas',
+            name: 'image',
+            color: '#2e8b57'
+          },
+          action: {
+            type: 'url',
+            url: 'https://www.pinterest.co.kr'
+          }
+        },
+        {
+          text: 'Home',
+          icon: {
+            type: 'fas',
+            name: 'home',
+            color: 'dodgerblue'
+          },
+          action: {
+            type: 'url',
+            url: 'https://www.naver.com'
+          }
+        },
+        {
+          text: 'Google',
+          icon: {
+            type: 'fab',
+            name: 'google',
+            color: '#f9d71c'
+          },
+          action: {
+            type: 'url',
+            url: 'https://www.google.com'
+          }
+        },
+        {
+          text: 'Youtube',
+          icon: {
+            type: 'fab',
+            name: 'youtube',
+            color: '#ff0000'
+          },
+          action: {
+            type: 'url',
+            url: 'https://www.youtube.com'
+          }
+        },
+        {
+          text: 'Setting',
+          icon: {
+            type: 'fas',
+            name: 'cog',
+            color: '#7851a9'
+          },
+          action: {
+            type: 'setting'
+          }
+        },
+        {
+          text: 'Facebook',
+          icon: {
+            type: 'fab',
+            name: 'facebook',
+            color: '#3b5998'
+          },
+          action: {
+            type: 'url',
+            url: 'https://facebook.com'
+          }
+        }
+      ]
     }
   },
   computed: {
@@ -173,6 +282,9 @@ export default {
         // Responsive pin option
         this.pin = null
       }
+    },
+    saveCurrentOption () {
+
     }
   }
 }
@@ -191,13 +303,24 @@ export default {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    width: 50%;
-    height: 70%;
     padding: 0 20px;
     background-color: #fff;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, .5);
     overflow-y: auto;
+    -webkit-transform: translate(-50%, -50%);
+       -moz-transform: translate(-50%, -50%);
+         -o-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+
+    @media only screen and (min-width: 320px), (min-width: 768px) {
+      width: 90%;
+      height: 90%;
+    }
+
+    @media only screen and (min-width: 1224px) {
+      width: 50%;
+      height: 70%;
+    }
 
     .modal__panel__header {
       position: relative;
@@ -234,18 +357,19 @@ export default {
         font-weight: bold;
         border-bottom: 2px solid #bbb;
         padding-bottom: 10px;
+        margin: 10px 0;
+        color: dodgerblue;
       }
 
       .controll_area {
-        display: block;
+        display: inline-block;
         width: 100%;
-        height: 2rem;
-        margin-top: 10px;
-        margin-bottom: 30px;
+        margin: 5px 0;
 
         .controll_area__text {
           float: left;
           color: #333;
+          width: 80%;
 
           .controll_area__text--title {
             font-weight: bold;
@@ -256,6 +380,39 @@ export default {
 
         .controll_area__switch {
           float: right;
+        }
+
+        .controll_area__sub_controll {
+          float: left;
+          width: 100%;
+          margin: 10px 0;
+
+          .controll_area__sub_controll__area {
+            margin: 0;
+            text-align: center;
+            float: left;
+
+            @media only screen and (min-width: 320px) {
+              width: 100%;
+              margin: 20px 0;
+            }
+
+            @media only screen and (min-width: 768px), (min-width: 1224px) {
+              width: 50%;
+            }
+
+            span.title {
+              margin: 0 10px;
+              padding: 5px 10px;
+              border-radius: 5px;
+              background-color: dodgerblue;
+              color: #fff;
+            }
+
+            .vc-chrome {
+              margin: auto;
+            }
+          }
         }
       }
     }
