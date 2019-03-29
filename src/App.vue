@@ -2,7 +2,7 @@
   <transition name="slide" mode="out-in">
     <div id="app" ref="app">
       <ClockView/>
-      <SettingModal v-if="modalShow" @onCloseModal="modalShow = false"/>
+      <SettingModal v-if="modalShow" @onCloseModal="onCloseModal"/>
       <CirclePanel v-else :degree="degree"/>
     </div>
   </transition>
@@ -38,7 +38,7 @@ export default {
   created () {
     // Get user data and set page title
     this.$store.dispatch('GET_USER_DATA')
-    document.title = this.userData.option.title
+    this.initHome()
   },
   mounted () {
     // Get screen size and regist event listeners after mounted
@@ -49,6 +49,9 @@ export default {
     this.$refs.app.addEventListener('touchmove', this.changeDegree)
   },
   methods: {
+    initHome () {
+      document.title = this.userData.option.title
+    },
     /**
      * @description Get current window size and store to vuex
      */
@@ -79,6 +82,10 @@ export default {
       } else if (action.type === 'setting') {
         this.modalShow = true
       }
+    },
+    onCloseModal () {
+      this.modalShow = false
+      setTimeout(this.initHome, 100)
     }
   }
 }
