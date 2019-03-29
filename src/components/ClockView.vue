@@ -26,11 +26,15 @@ export default {
     }
   },
   created () {
+    // Update current time and activate timer
     this.updateTime()
     this.expected = Date.now() + 1000
     setTimeout(this.timer, 1000)
   },
   methods: {
+    /**
+     * @description Timer
+     */
     timer () {
       let currentTime = Date.now()
       this.updateTime()
@@ -38,13 +42,20 @@ export default {
       this.expected += 1000
       setTimeout(this.timer, Math.max(0, 1000 - deltaTime))
     },
+    /**
+     * @description Update current time value
+     */
     updateTime () {
       let currentDate = new Date()
-
       this.hour = this.paddingZero(currentDate.getHours())
       this.minute = this.paddingZero(currentDate.getMinutes())
       this.second = this.paddingZero(currentDate.getSeconds())
     },
+    /**
+     * @description Append zero
+     * @param {number} number Target number
+     * @return {string} 00 format string
+     */
     paddingZero (number) {
       if (number.toString().length === 2) {
         return '' + number
