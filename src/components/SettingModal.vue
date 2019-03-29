@@ -70,7 +70,7 @@
               <label style="margin: 0px;" @click="changePinOption"></label>
             </div>
             <div class="controll_area__sub_controll" v-if="!responsivePinCheck">
-              <div class="controll_area__sub_controll__area">
+              <div class="controll_area__sub_controll__area single">
                 <span class="title">고정 핀 색상</span>
                 <color-picker v-model="pin"/>
               </div>
@@ -415,6 +415,10 @@ export default {
 
             @media only screen and (min-width: 768px), (min-width: 1224px) {
               width: 50%;
+            }
+
+            &.single {
+              width: 100%;
             }
 
             span.title {
