@@ -103,17 +103,12 @@
           </div>
           <div class="controll_area">
             <div class="controll_area__text">
-              <div class="controll_area__text--title">메뉴 활성화 색상</div>
-              선택된 메뉴의 색상 스타일을 지정합니다
+              <div class="controll_area__text--title">활성화 메뉴 배경색</div>
+              활성화된 메뉴의 배경 색상을 지정합니다
             </div>
             <div class="controll_area__sub_controll">
-              <div class="controll_area__sub_controll__area">
-                <span class="title">배경색</span>
+              <div class="controll_area__sub_controll__area single">
                 <color-picker v-model="option.activeBackgroundColor"/>
-              </div>
-              <div class="controll_area__sub_controll__area">
-                <span class="title">아이콘색</span>
-                <color-picker v-model="option.activeColor"/>
               </div>
             </div>
           </div>
@@ -132,7 +127,7 @@
               설정을 기본값으로 초기화합니다
             </div>
             <div class="controll_area__sub_controll">
-              <button class="button button--red">초기화</button>
+              <button class="button button--red" @click="resetUserData">초기화</button>
             </div>
           </div>
         </div>
@@ -218,6 +213,14 @@ export default {
     saveCurrentOption () {
       this.$store.commit('SET_USER_DATA', this.$data)
       this.$store.dispatch('SET_USER_DATA')
+    },
+    resetUserData () {
+      if (confirm('초기화 하시겠습니까?')) {
+        this.menu = DEFAULT_DATA.menu
+        this.option = DEFAULT_DATA.option
+        this.$store.commit('SET_USER_DATA', DEFAULT_DATA)
+        this.$store.dispatch('SET_USER_DATA')
+      }
     }
   }
 }
