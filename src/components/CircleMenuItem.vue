@@ -18,24 +18,24 @@ export default {
     index: {
       type: Number,
       required: true
+    },
+    defaultStyle: {
+      type: Object,
+      required: true
+    },
+    activeStyle: {
+      type: Object,
+      required: true
     }
   },
   data () {
     return {
-      defaultStyle: {
-        backgroundColor: '#fff',
-        color: '#000'
-      },
-      activeStyle: {
-        backgroundColor: '#eee',
-        color: 'dodgerblue'
-      },
       currentStyle: {}
     }
   },
   computed: {
     menuData () {
-      return this.$store.state.userData.menu[this.index]
+      return this.userData.menu[this.index]
     },
     ...mapState({
       userData: state => state.userData,
@@ -49,8 +49,6 @@ export default {
   },
   created () {
     // Set default value from user data
-    this.defaultStyle = this.userData.option['default']
-    this.activeStyle = this.userData.option['active']
     this.currentStyle = this.defaultStyle
   },
   mounted () {
@@ -72,7 +70,7 @@ export default {
         this.currentStyle.color = this.menuData.icon.color
 
         // If responsive pin option is on
-        if (!this.userData.option.pin) {
+        if (!this.userData.option.pin.hex) {
           this.$emit('onColorChange', this.menuData.icon.color)
         }
       } else {

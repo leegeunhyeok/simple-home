@@ -144,6 +144,7 @@
 <script>
 import { mapState } from 'vuex'
 import { Chrome } from 'vue-color'
+import DEFAULT_DATA from '@/data/default'
 
 export default {
   name: 'setting-modal',
@@ -151,112 +152,14 @@ export default {
     'color-picker': Chrome
   },
   data () {
-    return {
-      // Copied user option values (temp)
-      title: 'Simple Home 🏠',
-      timeFormat: '24',
-      clockMargin: 150,
-      apm: true,
-      date: true,
-      speed: 2,
-      showAlt: true,
-      newTab: false,
-      pin: {
-        hex: '#1e90ff'
-      },
-      defaultColor: {
-        hex: '#555555'
-      },
-      defaultBackgroundColor: {
-        hex: '#ffffff'
-      },
-      activeColor: {
-        hex: '#555555'
-      },
-      activeBackgroundColor: {
-        hex: '#eeeeee'
-      },
-      menu: [
-        {
-          text: 'Picture',
-          icon: {
-            type: 'fas',
-            name: 'image',
-            color: '#2e8b57'
-          },
-          action: {
-            type: 'url',
-            url: 'https://www.pinterest.co.kr'
-          }
-        },
-        {
-          text: 'Home',
-          icon: {
-            type: 'fas',
-            name: 'home',
-            color: 'dodgerblue'
-          },
-          action: {
-            type: 'url',
-            url: 'https://www.naver.com'
-          }
-        },
-        {
-          text: 'Google',
-          icon: {
-            type: 'fab',
-            name: 'google',
-            color: '#f9d71c'
-          },
-          action: {
-            type: 'url',
-            url: 'https://www.google.com'
-          }
-        },
-        {
-          text: 'Youtube',
-          icon: {
-            type: 'fab',
-            name: 'youtube',
-            color: '#ff0000'
-          },
-          action: {
-            type: 'url',
-            url: 'https://www.youtube.com'
-          }
-        },
-        {
-          text: 'Setting',
-          icon: {
-            type: 'fas',
-            name: 'cog',
-            color: '#7851a9'
-          },
-          action: {
-            type: 'setting'
-          }
-        },
-        {
-          text: 'Facebook',
-          icon: {
-            type: 'fab',
-            name: 'facebook',
-            color: '#3b5998'
-          },
-          action: {
-            type: 'url',
-            url: 'https://facebook.com'
-          }
-        }
-      ]
-    }
+    return DEFAULT_DATA
   },
   computed: {
     timeFormatCheck () {
       return this.timeFormat === '12'
     },
     responsivePinCheck () {
-      return !this.pin
+      return !this.pin.hex
     },
     ...mapState({
       userData: state => state.userData
@@ -298,30 +201,13 @@ export default {
      */
     changePinOption (event) {
       event.stopPropagation()
-      if (this.pin === null) {
+      if (this.pin.hex === null) {
         // Default static pin color
-        this.pin = '#1e90ff'
+        this.pin.hex = '#1e90ff'
       } else {
         // Responsive pin option
-        this.pin = null
+        this.pin.hex = null
       }
-    },
-    loadUserData () {
-      let userData = this.userData
-      this.title = userData.option.title
-      this.timeFormat = userData.option.timeFormat
-      this.clockMargin = userData.option.clockMargin
-      this.apm = userData.option.apm
-      this.date = userData.option.date
-      this.speed = userData.option.speed
-      this.showAlt = userData.option.showAlt
-      this.newTab = userData.option.newTab
-      this.pin.hex = userData.option.pin
-      this.defaultColor.hex = userData.option.default.color
-      this.defaultBackgroundColor.hex = userData.option.default.backgroundColor
-      this.activeColor.hex = userData.option.active.color
-      this.activeBackgroundColor.hex = userData.option.active.backgroundColor
-      this.menu = userData.menu
     },
     saveCurrentOption () {
       let userData = {}
@@ -336,12 +222,12 @@ export default {
         newTab: this.newTab,
         pin: this.pin.hex,
         default: {
-          color: this.defaultColor,
-          backgroundColor: this.defaultBackgroundColor
+          color: this.defaultColor.hex,
+          backgroundColor: this.defaultBackgroundColor.hex
         },
         active: {
-          color: this.activeColor,
-          backgroundColor: this.activeBackgroundColor
+          color: this.activeColor.hex,
+          backgroundColor: this.activeBackgroundColor.hex
         }
       }
       userData.option = option

@@ -10,7 +10,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     screenWidth: 0,
-    selectedMenuIndex: 0
+    selectedMenuIndex: 1
   },
   getters,
   mutations,

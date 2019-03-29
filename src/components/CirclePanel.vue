@@ -5,6 +5,8 @@
         <CircleMenuItem
           v-for="(index, i) in menus"
           @onColorChange="changePinColor"
+          :defaultStyle="origin"
+          :activeStyle="active"
           :index="i"
           :key="i"
         />
@@ -34,6 +36,13 @@ export default {
     return {
       menus: new Array(6),
       currentIndex: 0,
+      origin: {
+        backgroundColor: '#fff',
+        color: '#000'
+      },
+      active: {
+        backgroundColor: '#eee'
+      },
       pinStyle: {
         backgroundColor: 'dodgerblue'
       }
@@ -54,16 +63,29 @@ export default {
     // Set current index value to vuex
     currentIndex (newValue) {
       this.$store.commit('SET_SELECTED_MENU', newValue)
+    },
+    // Update menu style after option changed
+    userData () {
+      this.updateMenuStyle()
     }
   },
   created () {
-    // Set pin color
-    this.pinStyle.backgroundColor = this.userData.option.pin
+    this.updateMenuStyle()
   },
   mounted () {
     this.changeRotateStatus()
   },
   methods: {
+    /**
+     * @description Set menu style
+     */
+    updateMenuStyle () {
+      // Set pin color and default, active style
+      this.pinStyle.backgroundColor = this.userData.option.pin.hex
+      this.origin.color = this.userData.option.defaultColor.hex
+      this.origin.backgroundColor = this.userData.option.defaultBackgroundColor.hex
+      this.active.backgroundColor = this.userData.option.activeBackgroundColor.hex
+    },
     /**
      * @description Change menu rotate degree
      */

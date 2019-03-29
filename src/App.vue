@@ -38,6 +38,13 @@ export default {
   created () {
     // Get user data and set page title
     this.$store.dispatch('GET_USER_DATA')
+    this.$store.watch(() => this.$store.state.userData,
+      value => {
+        // console.log('watch', value)
+      }, {
+        deep: true
+      }
+    )
     this.initHome()
   },
   mounted () {
@@ -50,7 +57,7 @@ export default {
   },
   methods: {
     initHome () {
-      document.title = this.userData.option.title
+      document.title = this.$store.state.userData.option.title
     },
     /**
      * @description Get current window size and store to vuex
