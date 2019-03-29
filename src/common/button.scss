@@ -1,0 +1,28 @@
+.button {
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  -webkit-transition: .3s;
+     -moz-transition: .3s;
+       -o-transition: .3s;
+          transition: .3s;
+
+  &.button--default {
+    background-color: #fff;
+    color: #555;
+
+    &:hover {
+      background-color: #ccc;
+    }
+  }
+
+  &.button--red {
+    background-color: tomato;
+    color: #fff;
+
+    &:hover {
+      background-color: #cc4f38;
+    }
+  }
+}

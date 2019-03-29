@@ -117,6 +117,15 @@
           <div class="controll_area">
             Menu customize
           </div>
+          <div class="controll_area">
+            <div class="controll_area__text">
+              <div class="controll_area__text--danger">초기화</div>
+              설정을 기본값으로 초기화합니다
+            </div>
+            <div class="controll_area__sub_controll">
+              <button class="button button--red">초기화</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -291,6 +300,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import '@/common/button.scss';
 @import '@/common/checkbox.scss';
 @import '@/common/input.scss';
 
@@ -375,6 +385,12 @@ export default {
             font-weight: bold;
             font-size: 1.2rem;
             color: #000;
+          }
+
+          .controll_area__text--danger {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: tomato;
           }
         }
 
