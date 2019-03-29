@@ -113,6 +113,7 @@ export default {
   name: 'setting-modal',
   data () {
     return {
+      // Copied user option values (temp)
       timeFormat: '24',
       apm: true,
       date: true,
@@ -130,29 +131,46 @@ export default {
     }
   },
   created () {
-
+ 
   },
   beforeDestroy () {
 
   },
-  methods: {
+  methods: {          
+    /**
+     * @description Emit modal close event to parent
+     * @param {MouseEvent} event
+     */
     onCloseModal (event) {
+      // Blocking event bubbling
       event.stopPropagation()
       this.$emit('onCloseModal')
     },
+    /**
+     * @description Change timeformat value
+     */
     changeTimeFormat (event) {
+      // Blocking event bubbling
       event.stopPropagation()
       if (this.timeFormat === '24') {
+        // 24 -> 12
         this.timeFormat = '12'
       } else {
+        // 12 -> 24
         this.timeFormat = '24'
       }
     },
+    /**
+     * @description Change pin option
+     * @param {MouseEvent} event
+     */
     changePinOption (event) {
       event.stopPropagation()
       if (this.pin === null) {
+        // Default static pin color
         this.pin = '#1e90ff'
       } else {
+        // Responsive pin option
         this.pin = null
       }
     }
