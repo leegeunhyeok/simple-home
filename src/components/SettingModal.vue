@@ -131,12 +131,12 @@ export default {
     }
   },
   created () {
- 
+
   },
   beforeDestroy () {
 
   },
-  methods: {          
+  methods: {
     /**
      * @description Emit modal close event to parent
      * @param {MouseEvent} event
