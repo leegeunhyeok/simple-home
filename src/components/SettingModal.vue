@@ -62,8 +62,8 @@
           <div class="modal__panel__content--header">사용자 설정</div>
           <div class="controll_area">
             <div class="controll_area__text">
-              <div class="controll_area__text--title">반응형 핀 색상</div>
-              선택한 메뉴의 색상으로 핀 색상이 변경됩니다
+              <div class="controll_area__text--title">반응형 핀 색상 활성화</div>
+              활성화된 메뉴의 색상으로 핀 색상이 변경됩니다
             </div>
             <div class="controll_area__switch">
               <div class="checkbox" :class="{ checked: responsivePinCheck }"></div>
@@ -71,7 +71,7 @@
             </div>
             <div class="controll_area__sub_controll" v-if="!responsivePinCheck">
               <div class="controll_area__sub_controll__area single">
-                <span class="title">고정 핀 색상</span>
+                <span class="title">기본 핀 색상</span>
                 <color-picker v-model="pin"/>
               </div>
             </div>
