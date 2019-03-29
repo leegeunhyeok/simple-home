@@ -15,7 +15,7 @@
               상단의 페이지 제목을 지정합니다
             </div>
             <div class="controll_area__switch">
-              <input v-model="title">
+              <input v-model="option.title">
             </div>
           </div>
           <div class="controll_area">
@@ -34,8 +34,8 @@
               오전, 오후 문구를 시간 옆에 표시합니다
             </div>
             <div class="controll_area__switch">
-              <div class="checkbox" :class="{ checked: apm }"></div>
-              <label style="margin: 0px;" @click="apm = !apm"></label>
+              <div class="checkbox" :class="{ checked: option.apm }"></div>
+              <label style="margin: 0px;" @click="option.apm = !option.apm"></label>
             </div>
           </div>
           <div class="controll_area">
@@ -44,8 +44,8 @@
               현재 날짜를 표시합니다
             </div>
             <div class="controll_area__switch">
-              <div class="checkbox" :class="{ checked: date }"></div>
-              <label style="margin: 0px;" @click="date = !date"></label>
+              <div class="checkbox" :class="{ checked: option.date }"></div>
+              <label style="margin: 0px;" @click="option.date = !option.date"></label>
             </div>
           </div>
           <div class="controll_area">
@@ -54,8 +54,8 @@
               선택된 메뉴의 미리보기 텍스트를 표시합니다
             </div>
             <div class="controll_area__switch">
-              <div class="checkbox" :class="{ checked: showAlt }"></div>
-              <label style="margin: 0px;" @click="showAlt = !showAlt"></label>
+              <div class="checkbox" :class="{ checked: option.showAlt }"></div>
+              <label style="margin: 0px;" @click="option.showAlt = !option.showAlt"></label>
             </div>
           </div>
           <div class="controll_area">
@@ -64,8 +64,8 @@
               메뉴를 통해 링크 이동시 새 탭으로 띄웁니다
             </div>
             <div class="controll_area__switch">
-              <div class="checkbox" :class="{ checked: newTab }"></div>
-              <label style="margin: 0px;" @click="newTab = !newTab"></label>
+              <div class="checkbox" :class="{ checked: option.newTab }"></div>
+              <label style="margin: 0px;" @click="option.newTab = !option.newTab"></label>
             </div>
           </div>
           <div class="modal__panel__content--header">사용자 설정</div>
@@ -81,7 +81,7 @@
             <div class="controll_area__sub_controll" v-if="!responsivePinCheck">
               <div class="controll_area__sub_controll__area single">
                 <span class="title">기본 핀 색상</span>
-                <color-picker v-model="pin"/>
+                <color-picker v-model="option.pin"/>
               </div>
             </div>
           </div>
@@ -93,11 +93,11 @@
             <div class="controll_area__sub_controll">
               <div class="controll_area__sub_controll__area">
                 <span class="title">배경색</span>
-                <color-picker v-model="defaultBackgroundColor"/>
+                <color-picker v-model="option.defaultBackgroundColor"/>
               </div>
               <div class="controll_area__sub_controll__area">
                 <span class="title">아이콘색</span>
-                <color-picker v-model="defaultColor"/>
+                <color-picker v-model="option.defaultColor"/>
               </div>
             </div>
           </div>
@@ -109,11 +109,11 @@
             <div class="controll_area__sub_controll">
               <div class="controll_area__sub_controll__area">
                 <span class="title">배경색</span>
-                <color-picker v-model="activeBackgroundColor"/>
+                <color-picker v-model="option.activeBackgroundColor"/>
               </div>
               <div class="controll_area__sub_controll__area">
                 <span class="title">아이콘색</span>
-                <color-picker v-model="activeColor"/>
+                <color-picker v-model="option.activeColor"/>
               </div>
             </div>
           </div>
@@ -146,27 +146,33 @@ import { mapState } from 'vuex'
 import { Chrome } from 'vue-color'
 import DEFAULT_DATA from '@/data/default'
 
+console.log(DEFAULT_DATA)
+
 export default {
   name: 'setting-modal',
   components: {
     'color-picker': Chrome
   },
   data () {
-    return DEFAULT_DATA
+    return {
+      menu: null,
+      option: null
+    }
   },
   computed: {
     timeFormatCheck () {
-      return this.timeFormat === '12'
+      return this.option.timeFormat === '12'
     },
     responsivePinCheck () {
-      return !this.pin.hex
+      return !this.option.pin.hex
     },
     ...mapState({
       userData: state => state.userData
     })
   },
   created () {
-    this.loadUserData()
+    this.menu = this.userData.menu
+    this.option = this.userData.option
   },
   beforeDestroy () {
     this.saveCurrentOption()
@@ -187,12 +193,12 @@ export default {
     changeTimeFormat (event) {
       // Blocking event bubbling
       event.stopPropagation()
-      if (this.timeFormat === '24') {
+      if (this.option.timeFormat === '24') {
         // 24 -> 12
-        this.timeFormat = '12'
+        this.option.timeFormat = '12'
       } else {
         // 12 -> 24
-        this.timeFormat = '24'
+        this.option.timeFormat = '24'
       }
     },
     /**
@@ -201,38 +207,16 @@ export default {
      */
     changePinOption (event) {
       event.stopPropagation()
-      if (this.pin.hex === null) {
+      if (this.option.pin.hex === null) {
         // Default static pin color
-        this.pin.hex = '#1e90ff'
+        this.option.pin.hex = '#1e90ff'
       } else {
         // Responsive pin option
-        this.pin.hex = null
+        this.option.pin.hex = null
       }
     },
     saveCurrentOption () {
-      let userData = {}
-      let option = {
-        title: this.title,
-        timeFormat: this.timeFormat,
-        clockMargin: this.clockMargin,
-        apm: this.apm,
-        date: this.date,
-        speed: this.speed,
-        showAlt: this.showAlt,
-        newTab: this.newTab,
-        pin: this.pin.hex,
-        default: {
-          color: this.defaultColor.hex,
-          backgroundColor: this.defaultBackgroundColor.hex
-        },
-        active: {
-          color: this.activeColor.hex,
-          backgroundColor: this.activeBackgroundColor.hex
-        }
-      }
-      userData.option = option
-      userData.menu = this.menu
-      this.$store.commit('SET_USER_DATA', userData)
+      this.$store.commit('SET_USER_DATA', this.$data)
       this.$store.dispatch('SET_USER_DATA')
     }
   }
