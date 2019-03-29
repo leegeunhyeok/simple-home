@@ -3,6 +3,7 @@ const _VERSION = 'v1'
 const DEFAULT_DATA = {
   option: {
     timeFormat: '24',
+    clockMargin: 150,
     apm: true,
     date: true,
     showAlt: true,
