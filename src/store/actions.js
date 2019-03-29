@@ -9,6 +9,7 @@ const DEFAULT_DATA = {
     newTab: false,
     pin: null,
     speed: 2,
+    title: 'Simple Home 🏠',
     default: {
       color: '#555',
       backgroundColor: '#fff'
