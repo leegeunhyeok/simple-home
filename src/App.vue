@@ -13,7 +13,6 @@ import { mapState } from 'vuex'
 import ClockView from '@/components/ClockView'
 import CirclePanel from '@/components/CirclePanel'
 import SettingModal from '@/components/SettingModal'
-import Icons from '@/model/icons.json'
 
 export default {
   name: 'app',
@@ -24,9 +23,9 @@ export default {
   },
   data () {
     return {
-      speed: 1,
-      screenWidth: 0,
+      // Menu rotate degree
       degree: 0,
+      // Modal show flag
       modalShow: false
     }
   },
@@ -37,10 +36,12 @@ export default {
     })
   },
   created () {
+    // Get user data and set page title
     this.$store.dispatch('GET_USER_DATA')
-    this.speed = 2
+    document.title = this.userData.option.title
   },
   mounted () {
+    // Get screen size and regist event listeners after mounted
     this.setScreenWidth()
     window.addEventListener('resize', this.setScreenWidth)
     this.$refs.app.addEventListener('click', this.activeSelectedMenu)
@@ -48,19 +49,31 @@ export default {
     this.$refs.app.addEventListener('touchmove', this.changeDegree)
   },
   methods: {
+    /**
+     * @description Get current window size and store to vuex
+     */
     setScreenWidth () {
       let screenWidth = window.innerWidth ||
         document.documentElement.clientWidth ||
         document.body.clientWidth
       this.$store.commit('SET_WIDTH', screenWidth)
     },
+    /**
+     * @description Change menu degree (check current cursor position)
+     * @param {MouseEvent} event
+     */
     changeDegree (event) {
       let x = event.clientX
-      this.degree = x / (this.$store.state.screenWidth / this.speed) * 360
+      let speed = this.userData.option.speed
+      this.degree = x / (this.$store.state.screenWidth / speed) * 360
     },
+    /**
+     * @description Activate selected menu
+     */
     activeSelectedMenu () {
-      console.log('click!')
       let action = this.userData.menu[this.currentIndex].action
+
+      // Check action type
       if (action.type === 'url') {
         location.href = action.url
       } else if (action.type === 'setting') {
