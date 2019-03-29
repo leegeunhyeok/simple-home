@@ -14,6 +14,7 @@ import { mapState } from 'vuex'
 export default {
   name: 'circle-menu-item',
   props: {
+    // Menu index (0 ~ 5)
     index: {
       type: Number,
       required: true
@@ -47,25 +48,35 @@ export default {
     }
   },
   created () {
+    // Set default value from user data
     this.defaultStyle = this.userData.option['default']
     this.activeStyle = this.userData.option['active']
     this.currentStyle = this.defaultStyle
   },
   mounted () {
+    // Dynamic style apply (rotate degree)
     let rotateDegree = this.index * 60
     this.$refs.menu.style.transform = `rotate(${rotateDegree}deg) skew(30deg)`
+    
+    // Checking activate status
     this.activateCheck()
   },
   methods: {
+    /**
+     * @description Check activate status
+     */
     activateCheck () {
       if (this.index === this.currentIndex) {
+        // Set active style
         this.currentStyle = this.activeStyle
         this.currentStyle.color = this.menuData.icon.color
 
+        // If responsive pin option is on
         if (!this.userData.option.pin) {
           this.$emit('onColorChange', this.menuData.icon.color)
         }
       } else {
+        // Set default style
         this.currentStyle = this.defaultStyle
       }
     }
