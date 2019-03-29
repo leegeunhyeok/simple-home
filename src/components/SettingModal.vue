@@ -214,12 +214,11 @@ export default {
       this.$store.commit('SET_USER_DATA', this.$data)
       this.$store.dispatch('SET_USER_DATA')
     },
-    resetUserData () {
+    resetUserData (event) {
       if (confirm('초기화 하시겠습니까?')) {
-        this.menu = DEFAULT_DATA.menu
-        this.option = DEFAULT_DATA.option
         this.$store.commit('SET_USER_DATA', DEFAULT_DATA)
         this.$store.dispatch('SET_USER_DATA')
+        location.reload()
       }
     }
   }
