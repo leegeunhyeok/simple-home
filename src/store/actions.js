@@ -8,6 +8,7 @@ const DEFAULT_DATA = {
     showAlt: true,
     newTab: false,
     pin: null,
+    speed: 2,
     default: {
       color: '#555',
       backgroundColor: '#fff'
