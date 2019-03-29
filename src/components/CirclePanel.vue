@@ -24,6 +24,7 @@ export default {
     CircleMenuItem
   },
   props: {
+    // Menu rotate degree
     degree: {
       type: Number,
       required: true
@@ -44,24 +45,34 @@ export default {
     })
   },
   watch: {
+    // Change menu rotate degree and
+    // update selected index after degree was changed
     degree (newValue) {
       this.changeRotateStatus()
       this.changeSelectMenu()
     },
+    // Set current index value to vuex
     currentIndex (newValue) {
       this.$store.commit('SET_SELECTED_MENU', newValue)
     }
   },
   created () {
+    // Set pin color
     this.pinStyle.backgroundColor = this.userData.option.pin
   },
   mounted () {
     this.changeRotateStatus()
   },
   methods: {
+    /**
+     * @description Change menu rotate degree
+     */
     changeRotateStatus () {
       this.$refs.menu.style.transform = `rotate(${this.degree}deg)`
     },
+    /**
+     * @description Update selected menu index
+     */
     changeSelectMenu () {
       let rotateCount = parseInt((this.degree / 60) / 6)
       let index = 1 - parseInt((this.degree + 30) / 60)
@@ -71,6 +82,10 @@ export default {
       }
       this.currentIndex = index
     },
+    /**
+     * @description Change pin color
+     * @param {string} color color code
+     */
     changePinColor (color) {
       this.pinStyle.backgroundColor = color
     }
