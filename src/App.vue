@@ -125,16 +125,16 @@ html, body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: transparent; 
+  background: transparent;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #aaa; 
+  background: #aaa;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #aaa; 
+  background: #aaa;
 }
 </style>

@@ -11,6 +11,15 @@
           <div class="modal__panel__content--header">기본 설정</div>
           <div class="controll_area">
             <div class="controll_area__text">
+              <div class="controll_area__text--title">페이지 제목</div>
+              상단의 페이지 제목을 지정합니다
+            </div>
+            <div class="controll_area__switch">
+              <input v-model="title">
+            </div>
+          </div>
+          <div class="controll_area">
+            <div class="controll_area__text">
               <div class="controll_area__text--title">시간 포맷</div>
               12시간 형식을 사용합니다
             </div>
@@ -113,9 +122,9 @@
               <div class="controll_area__text--title">메뉴 사용자화</div>
               기능, 아이콘, 색상 등 메뉴를 편집합니다
             </div>
-          </div>
-          <div class="controll_area">
-            Menu customize
+            <div class="controll_area__sub_controll">
+              Menu customize
+            </div>
           </div>
           <div class="controll_area">
             <div class="controll_area__text">
@@ -143,16 +152,17 @@ export default {
   data () {
     return {
       // Copied user option values (temp)
+      title: 'Simple Home 🏠',
       timeFormat: '24',
+      clockMargin: 150,
       apm: true,
       date: true,
+      speed: 2,
       showAlt: true,
       newTab: false,
       pin: {
         hex: '#1e90ff'
       },
-      speed: 2,
-      title: 'Simple Home 🏠',
       defaultColor: {
         hex: '#555555'
       },
@@ -252,7 +262,7 @@ export default {
 
   },
   beforeDestroy () {
-
+    this.saveCurrentOption()
   },
   methods: {
     /**
@@ -293,7 +303,30 @@ export default {
       }
     },
     saveCurrentOption () {
-
+      let userData = {}
+      let option = {
+        title: this.title,
+        timeFormat: this.timeFormat,
+        clockMargin: this.clockMargin,
+        apm: this.apm,
+        date: this.date,
+        speed: this.speed,
+        showAlt: this.showAlt,
+        newTab: this.newTab,
+        pin: this.pin.hex,
+        default: {
+          color: this.defaultColor,
+          backgroundColor: this.defaultBackgroundColor
+        },
+        active: {
+          color: this.activeColor,
+          backgroundColor: this.activeBackgroundColor
+        }
+      }
+      userData.option = option
+      userData.menu = this.menu
+      this.$store.commit('SET_USER_DATA', userData)
+      this.$store.dispatch('SET_USER_DATA')
     }
   }
 }
@@ -372,6 +405,7 @@ export default {
       }
 
       .controll_area {
+        position: relative;
         display: inline-block;
         width: 100%;
         margin: 5px 0;
@@ -379,7 +413,7 @@ export default {
         .controll_area__text {
           float: left;
           color: #333;
-          width: 80%;
+          width: 100%;
 
           .controll_area__text--title {
             font-weight: bold;
@@ -395,7 +429,8 @@ export default {
         }
 
         .controll_area__switch {
-          float: right;
+          position: absolute;
+          right: 0px;
         }
 
         .controll_area__sub_controll {
