@@ -10,9 +10,9 @@ export default {
     title: 'Simple Home 🏠',
     pin: null,
     defaultColor: '#555555',
-    defaultBackgroundColor: '#ffffff',
+    defaultBackgroundColor: '#FFFFFF',
     activeColor: '#555555',
-    activeBackgroundColor: '#eeeeee'
+    activeBackgroundColor: '#EEEEEE'
   },
   menu: [
     {
@@ -20,7 +20,7 @@ export default {
       icon: {
         type: 'fas',
         name: 'image',
-        color: '#2e8b57'
+        color: '#2E8B57'
       },
       action: {
         type: 'url',
@@ -32,7 +32,7 @@ export default {
       icon: {
         type: 'fas',
         name: 'home',
-        color: 'dodgerblue'
+        color: '#1E90FF'
       },
       action: {
         type: 'url',
@@ -44,7 +44,7 @@ export default {
       icon: {
         type: 'fab',
         name: 'google',
-        color: '#f9d71c'
+        color: '#F9D71C'
       },
       action: {
         type: 'url',
@@ -56,7 +56,7 @@ export default {
       icon: {
         type: 'fab',
         name: 'youtube',
-        color: '#ff0000'
+        color: '#FF0000'
       },
       action: {
         type: 'url',
@@ -68,7 +68,7 @@ export default {
       icon: {
         type: 'fas',
         name: 'cog',
-        color: '#7851a9'
+        color: '#7851A9'
       },
       action: {
         type: 'setting'
@@ -79,7 +79,7 @@ export default {
       icon: {
         type: 'fab',
         name: 'facebook',
-        color: '#3b5998'
+        color: '#3B5998'
       },
       action: {
         type: 'url',
