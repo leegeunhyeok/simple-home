@@ -35,10 +35,11 @@ export default {
   },
   computed: {
     menuData () {
-      return this.userData.menu[this.index]
+      return this.menu[this.index]
     },
     ...mapState({
-      userData: state => state.userData,
+      option: state => state,
+      menu: state => state.menu,
       currentIndex: state => state.selectedMenuIndex
     })
   },
@@ -70,7 +71,7 @@ export default {
         this.currentStyle.color = this.menuData.icon.color
 
         // If responsive pin option is on
-        if (!this.userData.option.pin.hex) {
+        if (!this.option.pin) {
           this.$emit('onColorChange', this.menuData.icon.color)
         }
       } else {
