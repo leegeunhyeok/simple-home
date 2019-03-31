@@ -50,6 +50,8 @@ export default {
   },
   computed: {
     ...mapState({
+      option: state => state,
+      menu: state => state.menu,
       userData: state => state.userData
     })
   },
@@ -81,10 +83,10 @@ export default {
      */
     updateMenuStyle () {
       // Set pin color and default, active style
-      this.pinStyle.backgroundColor = this.userData.option.pin.hex
-      this.origin.color = this.userData.option.defaultColor.hex
-      this.origin.backgroundColor = this.userData.option.defaultBackgroundColor.hex
-      this.active.backgroundColor = this.userData.option.activeBackgroundColor.hex
+      this.pinStyle.backgroundColor = this.option.pin
+      this.origin.color = this.option.defaultColor
+      this.origin.backgroundColor = this.option.defaultBackgroundColor
+      this.active.backgroundColor = this.option.activeBackgroundColor
     },
     /**
      * @description Change menu rotate degree

@@ -31,7 +31,8 @@ export default {
   },
   computed: {
     ...mapState({
-      userData: state => state.userData,
+      state: state => state,
+      menu: state => state.menu,
       currentIndex: state => state.selectedMenuIndex
     })
   },
@@ -51,7 +52,7 @@ export default {
   },
   methods: {
     initHome () {
-      document.title = this.$store.state.userData.option.title
+      document.title = this.state.title
     },
     /**
      * @description Get current window size and store to vuex
@@ -68,14 +69,14 @@ export default {
      */
     changeDegree (event) {
       let x = event.clientX
-      let speed = this.userData.option.speed
-      this.degree = x / (this.$store.state.screenWidth / speed) * 360
+      let speed = this.state.speed
+      this.degree = x / (this.state.screenWidth / speed) * 360
     },
     /**
      * @description Activate selected menu
      */
     activeSelectedMenu () {
-      let action = this.userData.menu[this.currentIndex].action
+      let action = this.menu[this.currentIndex].action
 
       // Check action type
       if (action.type === 'url') {
