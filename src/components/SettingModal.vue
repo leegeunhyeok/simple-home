@@ -15,7 +15,7 @@
               상단의 페이지 제목을 지정합니다
             </div>
             <div class="controll_area__switch">
-              <input v-model="option.title">
+              <input v-model="title">
             </div>
           </div>
           <div class="controll_area">
@@ -34,8 +34,8 @@
               오전, 오후 문구를 시간 옆에 표시합니다
             </div>
             <div class="controll_area__switch">
-              <div class="checkbox" :class="{ checked: option.apm }"></div>
-              <label style="margin: 0px;" @click="option.apm = !option.apm"></label>
+              <div class="checkbox" :class="{ checked: tempApm }"></div>
+              <label style="margin: 0px;" @click="tempApm = !tempApm"></label>
             </div>
           </div>
           <div class="controll_area">
@@ -44,8 +44,8 @@
               현재 날짜를 표시합니다
             </div>
             <div class="controll_area__switch">
-              <div class="checkbox" :class="{ checked: option.date }"></div>
-              <label style="margin: 0px;" @click="option.date = !option.date"></label>
+              <div class="checkbox" :class="{ checked: tempDate }"></div>
+              <label style="margin: 0px;" @click="tempDate = !tempDate"></label>
             </div>
           </div>
           <div class="controll_area">
@@ -54,8 +54,8 @@
               선택된 메뉴의 미리보기 텍스트를 표시합니다
             </div>
             <div class="controll_area__switch">
-              <div class="checkbox" :class="{ checked: option.showAlt }"></div>
-              <label style="margin: 0px;" @click="option.showAlt = !option.showAlt"></label>
+              <div class="checkbox" :class="{ checked: tempShowAlt }"></div>
+              <label style="margin: 0px;" @click="tempShowAlt = !tempShowAlt"></label>
             </div>
           </div>
           <div class="controll_area">
@@ -64,8 +64,8 @@
               메뉴를 통해 링크 이동시 새 탭으로 띄웁니다
             </div>
             <div class="controll_area__switch">
-              <div class="checkbox" :class="{ checked: option.newTab }"></div>
-              <label style="margin: 0px;" @click="option.newTab = !option.newTab"></label>
+              <div class="checkbox" :class="{ checked: tempNewTab }"></div>
+              <label style="margin: 0px;" @click="tempNewTab = !tempNewTab"></label>
             </div>
           </div>
           <div class="modal__panel__content--header">사용자 설정</div>
@@ -81,7 +81,7 @@
             <div class="controll_area__sub_controll" v-if="!responsivePinCheck">
               <div class="controll_area__sub_controll__area single">
                 <span class="title">기본 핀 색상</span>
-                <color-picker v-model="option.pin"/>
+                <color-picker v-model="tempPin"/>
               </div>
             </div>
           </div>
@@ -93,11 +93,11 @@
             <div class="controll_area__sub_controll">
               <div class="controll_area__sub_controll__area">
                 <span class="title">배경색</span>
-                <color-picker v-model="option.defaultBackgroundColor"/>
+                <color-picker v-model="tempDefaultBackgroundColor"/>
               </div>
               <div class="controll_area__sub_controll__area">
                 <span class="title">아이콘색</span>
-                <color-picker v-model="option.defaultColor"/>
+                <color-picker v-model="tempDefaultColor"/>
               </div>
             </div>
           </div>
@@ -108,7 +108,7 @@
             </div>
             <div class="controll_area__sub_controll">
               <div class="controll_area__sub_controll__area single">
-                <color-picker v-model="option.activeBackgroundColor"/>
+                <color-picker v-model="tempActiveBackgroundColor"/>
               </div>
             </div>
           </div>
@@ -141,8 +141,6 @@ import { mapState } from 'vuex'
 import { Chrome } from 'vue-color'
 import DEFAULT_DATA from '@/data/default'
 
-console.log(DEFAULT_DATA)
-
 export default {
   name: 'setting-modal',
   components: {
@@ -150,24 +148,80 @@ export default {
   },
   data () {
     return {
-      menu: null,
-      option: null
+      tempTimeFormat: '',
+      tempClockMargin: 0,
+      tempApm: false,
+      tempDate: false,
+      tempShowAlt: false,
+      tempNewTab: false,
+      tempSpeed: 0,
+      tempTitle: '',
+      tempPin: null,
+      tempDefaultColor: '',
+      tempDefaultBackgroundColor: '',
+      tempActiveBackgroundColor: '',
+      tempMenu: []
     }
   },
   computed: {
     timeFormatCheck () {
-      return this.option.timeFormat === '12'
+      return this.tempTimeFormat === '12'
     },
     responsivePinCheck () {
-      return !this.option.pin.hex
+      return !this.tempPin
     },
-    ...mapState({
-      userData: state => state.userData
-    })
+    ...mapState([
+      'timeFormat',
+      'clockMargin',
+      'apm',
+      'date',
+      'showAlt',
+      'newTab',
+      'speed',
+      'title',
+      'pin',
+      'defaultColor',
+      'defaultBackgroundColor',
+      'activeBackgroundColor',
+      'menu'
+    ])
+  },
+  watch: {
+    tempDefaultColor (newVal) {
+      if (newVal instanceof Object) {
+        this.tempDefaultColor = newVal.hex
+      }
+    },
+    tempDefaultBackgroundColor (newVal) {
+      if (newVal instanceof Object) {
+        this.tempDefaultBackgroundColor = newVal.hex
+      }
+    },
+    tempActiveBackgroundColor (newVal) {
+      if (newVal instanceof Object) {
+        this.tempActiveBackgroundColor = newVal.hex
+      }
+    },
+    tempPin (newVal) {
+      if (!newVal === null && newVal instanceof Object) {
+        this.tempPin = newVal.hex
+      }
+    }
   },
   created () {
-    this.menu = this.userData.menu
-    this.option = this.userData.option
+    this.tempTimeFormat = this.timeFormat
+    this.tempClockMargin = this.clockMargin
+    this.tempApm = this.apm
+    this.tempDate = this.date
+    this.tempShowAlt = this.showAlt
+    this.tempNewTab = this.newTab
+    this.tempSpeed = this.speed
+    this.tempTitle = this.title
+    this.tempPin = this.pin
+    this.tempDefaultColor = this.defaultColor
+    this.tempDefaultBackgroundColor = this.defaultBackgroundColor
+    this.tempActiveBackgroundColor = this.activeBackgroundColor
+    this.tempMenu = this.menu
   },
   beforeDestroy () {
     this.saveCurrentOption()
@@ -185,41 +239,63 @@ export default {
     /**
      * @description Change timeformat value
      */
-    changeTimeFormat (event) {
-      // Blocking event bubbling
-      event.stopPropagation()
-      if (this.option.timeFormat === '24') {
+    changeTimeFormat () {
+      if (this.tempTimeFormat === '24') {
         // 24 -> 12
-        this.option.timeFormat = '12'
+        this.tempTimeFormat = '12'
       } else {
         // 12 -> 24
-        this.option.timeFormat = '24'
+        this.tempTimeFormat = '24'
       }
     },
     /**
      * @description Change pin option
-     * @param {MouseEvent} event
      */
-    changePinOption (event) {
-      event.stopPropagation()
-      if (this.option.pin.hex === null) {
+    changePinOption () {
+      if (this.tempPin === null) {
         // Default static pin color
-        this.option.pin.hex = '#1e90ff'
+        this.tempPin = '#1E90FF'
       } else {
         // Responsive pin option
-        this.option.pin.hex = null
+        this.tempPin = null
       }
     },
+    /**
+     * @description Set vuex state value
+     * @param {string} key
+     * @param {any} value
+     */
+    setState (key, value) {
+      this.$store.commit('SET_STATE', { key, value })
+    },
+    /**
+     * @description Save current tempDatas
+     */
     saveCurrentOption () {
-      this.$store.commit('SET_USER_DATA', this.$data)
-      this.$store.dispatch('SET_USER_DATA')
+      this.setState('timeFormat', this.tempTimeFormat)
+      this.setState('clockMargin', this.tempClockMargin)
+      this.setState('apm', this.tempApm)
+      this.setState('date', this.tempDate)
+      this.setState('showAlt', this.tempShowAlt)
+      this.setState('newTab', this.tempNewTab)
+      this.setState('speed', this.tempSpeed)
+      this.setState('title', this.tempTitle)
+      this.setState('pin', this.tempPin)
+      this.setState('defaultColor', this.tempDefaultColor)
+      this.setState('defaultBackgroundColor', this.tempDefaultBackgroundColor)
+      this.setState('activeBackgroundColor', this.tempActiveBackgroundColor)
+      this.setState('menu', this.tempMenu)
+      this.$store.dispatch('SAVE_USER_DATA')
     },
-    resetUserData (event) {
-      if (confirm('초기화 하시겠습니까?')) {
-        this.$store.commit('SET_USER_DATA', DEFAULT_DATA)
-        this.$store.dispatch('SET_USER_DATA')
-        location.reload()
+    /**
+     * @description Reset option data (default value)
+     */
+    resetUserData () {
+      for (let key of Object.keys(DEFAULT_DATA.option)) {
+        let target = key.charAt(0).toUpperCase() + key.slice(1)
+        this['temp' + target] = DEFAULT_DATA.option[key]
       }
+      this.tempMenu = DEFAULT_DATA.menu
     }
   }
 }
