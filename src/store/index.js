@@ -21,9 +21,8 @@ export default new Vuex.Store({
     title: 'Simple Home 🏠',
     pin: null,
     defaultColor: '#555555',
-    defaultBackgroundColor: '#ffffff',
-    activeColor: '#555555',
-    activeBackgroundColor: '#eeeeee',
+    defaultBackgroundColor: '#FFFFFF',
+    activeBackgroundColor: '#EEEEEE',
     menu: []
   },
   getters,
