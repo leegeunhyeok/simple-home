@@ -8,21 +8,11 @@ export default {
     newTab: false,
     speed: 2,
     title: 'Simple Home 🏠',
-    pin: {
-      hex: null
-    },
-    defaultColor: {
-      hex: '#555555'
-    },
-    defaultBackgroundColor: {
-      hex: '#ffffff'
-    },
-    activeColor: {
-      hex: '#555555'
-    },
-    activeBackgroundColor: {
-      hex: '#eeeeee'
-    }
+    pin: null,
+    defaultColor: '#555555',
+    defaultBackgroundColor: '#ffffff',
+    activeColor: '#555555',
+    activeBackgroundColor: '#eeeeee'
   },
   menu: [
     {

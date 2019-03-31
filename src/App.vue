@@ -37,14 +37,8 @@ export default {
   },
   created () {
     // Get user data and set page title
-    this.$store.dispatch('GET_USER_DATA')
-    this.$store.watch(() => this.$store.state.userData,
-      value => {
-        // console.log('watch', value)
-      }, {
-        deep: true
-      }
-    )
+    this.$store.dispatch('LOAD_USER_DATA')
+    this.$store.dispatch('LOAD_MENU_DATA')
     this.initHome()
   },
   mounted () {
