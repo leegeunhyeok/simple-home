@@ -138,7 +138,7 @@
                   :name="!drag ? 'flip-list' : null"
                 >
                   <li class="menu_list__item"
-                    v-for="(menu, i) in menu" :key="i + menu.text">
+                    v-for="(menu, i) in menu" :key="'' + i">
                     <input v-model="menu.text">
                   </li>
                 </transition-group>
@@ -367,6 +367,7 @@ export default {
      */
     saveCurrentOption () {
       this.$store.dispatch('SAVE_USER_DATA')
+      this.$store.dispatch('SAVE_MENU_DATA')
     },
     /**
      * @description Reset option data (default value)
