@@ -15,7 +15,16 @@
               상단의 페이지 제목을 지정합니다
             </div>
             <div class="controll_area__switch">
-              <input v-model="title">
+              <input v-model="tempTitle">
+            </div>
+          </div>
+          <div class="controll_area">
+            <div class="controll_area__text">
+              <div class="controll_area__text--title">시계 상단 여백</div>
+              시계의 상단 여백을 지정합니다
+            </div>
+            <div class="controll_area__switch">
+              <input v-model="tempClockMargin">
             </div>
           </div>
           <div class="controll_area">
@@ -31,7 +40,7 @@
           <div class="controll_area">
             <div class="controll_area__text">
               <div class="controll_area__text--title">오전/오후</div>
-              오전, 오후 문구를 시간 옆에 표시합니다
+              오전, 오후 문구를 표시합니다
             </div>
             <div class="controll_area__switch">
               <div class="checkbox" :class="{ checked: tempApm }"></div>
