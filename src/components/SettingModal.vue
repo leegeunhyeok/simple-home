@@ -4,7 +4,7 @@
       <div class="modal__panel">
         <div class="modal__panel__header">
           <span class="modal__panel__header__close"
-            @click.self="onCloseModal">
+            @click.stop="onCloseModal">
           </span>
         </div>
         <div class="modal__panel__content">
@@ -17,7 +17,7 @@
             </div>
             <div class="controll_area__sub_controll">
               <button class="button button--red"
-                @click="resetUserData"
+                @click.stop="resetUserData"
               >초기화</button>
             </div>
           </div>
@@ -45,11 +45,8 @@ export default {
   methods: {
     /**
      * @description Emit modal close event to parent
-     * @param {MouseEvent} event
      */
-    onCloseModal (event) {
-      // Blocking event bubbling
-      event.stopPropagation()
+    onCloseModal () {
       this.$emit('onCloseModal')
     },
     /**
@@ -62,9 +59,7 @@ export default {
     /**
      * @description Reset option data (default value)
      */
-    resetUserData (event) {
-      // Blocking event bubbling
-      event.stopPropagation()
+    resetUserData () {
       for (let key of Object.keys(DEFAULT_DATA.option)) {
         this.$store.commit('SET_STATE', {
           key,
