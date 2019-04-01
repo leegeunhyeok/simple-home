@@ -5,8 +5,6 @@
         <CircleMenuItem
           v-for="(index, i) in menus"
           @onColorChange="changePinColor"
-          :defaultStyle="origin"
-          :activeStyle="active"
           :index="i"
           :key="i"
         />
@@ -36,13 +34,6 @@ export default {
     return {
       menus: new Array(6),
       currentIndex: 0,
-      origin: {
-        backgroundColor: '#fff',
-        color: '#000'
-      },
-      active: {
-        backgroundColor: '#eee'
-      },
       pinStyle: {
         backgroundColor: 'dodgerblue'
       }
@@ -51,8 +42,7 @@ export default {
   computed: {
     ...mapState({
       option: state => state,
-      menu: state => state.menu,
-      userData: state => state.userData
+      menu: state => state.menu
     })
   },
   watch: {
@@ -67,7 +57,8 @@ export default {
       this.$store.commit('SET_SELECTED_MENU', newValue)
     },
     // Update menu style after option changed
-    userData () {
+    option () {
+      console.log('aa')
       this.updateMenuStyle()
     }
   },
@@ -84,9 +75,6 @@ export default {
     updateMenuStyle () {
       // Set pin color and default, active style
       this.pinStyle.backgroundColor = this.option.pin
-      this.origin.color = this.option.defaultColor
-      this.origin.backgroundColor = this.option.defaultBackgroundColor
-      this.active.backgroundColor = this.option.activeBackgroundColor
     },
     /**
      * @description Change menu rotate degree

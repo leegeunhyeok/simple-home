@@ -3,7 +3,7 @@
     :style="currentStyle"
   >
     <font-awesome-icon class="circle-menu-item__icon"
-      :icon="[menuData.icon.type, menuData.icon.name]"
+      :icon="[currentMenuData.icon.type, currentMenuData.icon.name]"
     />
   </div>
 </template>
@@ -18,29 +18,27 @@ export default {
     index: {
       type: Number,
       required: true
-    },
-    defaultStyle: {
-      type: Object,
-      required: true
-    },
-    activeStyle: {
-      type: Object,
-      required: true
     }
   },
   data () {
     return {
-      currentStyle: {}
+      currentStyle: null
     }
   },
   computed: {
-    menuData () {
-      return this.menu[this.index]
+    currentMenuData () {
+      return this.$store.state.menu[this.index]
     },
     ...mapState({
       option: state => state,
       menu: state => state.menu,
-      currentIndex: state => state.selectedMenuIndex
+      currentIndex: state => state.selectedMenuIndex,
+      defaultStyle: state => {
+        return {
+          color: state.defaultColor,
+          'background-color': state.defaultBackgroundColor 
+        }
+      }
     })
   },
   watch: {
@@ -66,13 +64,16 @@ export default {
      */
     activateCheck () {
       if (this.index === this.currentIndex) {
+        let color = this.currentMenuData.icon.color
         // Set active style
-        this.currentStyle = this.activeStyle
-        this.currentStyle.color = this.menuData.icon.color
+        this.currentStyle = {
+          color,
+          'background-color': this.option.activeBackgroundColor
+        }
 
         // If responsive pin option is on
         if (!this.option.pin) {
-          this.$emit('onColorChange', this.menuData.icon.color)
+          this.$emit('onColorChange', this.currentMenuData.icon.color)
         }
       } else {
         // Set default style
