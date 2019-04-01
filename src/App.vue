@@ -2,7 +2,10 @@
   <transition name="slide" mode="out-in">
     <div id="app" ref="app">
       <ClockView/>
-      <SettingModal v-if="modalShow" @onCloseModal="onCloseModal"/>
+      <SettingModal v-if="modalShow"
+        @onOpenColorPicker="onOpenColorPicker($event)"
+        @onCloseModal="onCloseModal"
+      />
       <CirclePanel v-else :degree="degree"/>
     </div>
   </transition>
@@ -86,8 +89,8 @@ export default {
       }
     },
     onCloseModal () {
-      this.modalShow = false
-      setTimeout(this.initHome, 100)
+      this.modalShow = this.colorPickerShow = false
+      this.initHome()
     }
   }
 }
