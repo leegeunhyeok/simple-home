@@ -224,6 +224,22 @@ export default {
                   float: right;
                   text-align: center;
                 }
+
+                .menu_list__item--more {
+                  cursor: pointer;
+                  margin-top: .4rem;
+                  margin-left: .4rem;
+                  width: 1.5rem;
+                  float: right;
+                  -webkit-transition: .2s;
+                     -moz-transition: .2s;
+                       -o-transition: .2s;
+                          transition: .2s;
+
+                  &.active {
+                    transform: rotate(90deg);
+                  }
+                }
               }
             }
 

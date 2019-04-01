@@ -65,8 +65,14 @@
                 v-for="(menu, i) in menu" :key="'' + i">
                 <font-awesome-icon icon="bars"/>
                 <input class="menu_list__item--text" v-model="menu.text">
+                <div class="menu_list__item--more"
+                  @click.stop="changeIconData(i)"
+                  :class="tempIndex === i ? 'active' : null"
+                >
+                  <font-awesome-icon :icon="['fas', 'chevron-right']"/>
+                </div>
                 <div class="menu_list__item--color"
-                  @click="changeIconColor(i)"
+                  @click.stop="changeIconColor(i)"
                 >
                   <font-awesome-icon
                     :icon="[menu.icon.type, menu.icon.name]"
@@ -134,7 +140,7 @@ export default {
         disabled: false,
         ghostClass: 'ghost'
       },
-      tempIndex: 0,
+      tempIndex: -1,
       tempColor: '',
       tempIcon: '',
       tempType: ''
@@ -226,6 +232,18 @@ export default {
       }
     },
     /**
+     * @description Set action, icon
+     * @param {number} index
+     */
+    changeIconData (index) {
+      // let targetMenu = this.menu[index]
+      if (this.tempIndex === index) {
+        this.tempIndex = -1
+        return
+      }
+      this.tempIndex = index
+    },
+    /**
      * @description Set color picker value
      * @param {number} index
      */
@@ -245,6 +263,7 @@ export default {
       this.menu[this.tempIndex].icon.icon = this.tempIcon
       this.menu[this.tempIndex].icon.type = this.tempType
       this.preview = true
+      this.tempIndex = -1
     },
     /**
      * @description Set vuex state value
