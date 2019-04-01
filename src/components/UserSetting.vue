@@ -78,20 +78,33 @@
           </drag-list>
         </div>
         <div class="controll_area__sub_controll__area">
-          <div class="menu_preview">
-            <div class="menu_preview__item"
-              :style="{
-                color: menu.icon.color,
-                transform: `rotate(${i * 60}deg) skew(30deg)`
-              }"
-              v-for="(menu, i) in menu" :key="'' + i"
-            >
-              <font-awesome-icon
-                class="menu_preview__item__icon"
-                :icon="[menu.icon.type, menu.icon.name]"
-              />
+          <transition name="preview-slide" mode="out-in">
+            <div class="menu_preview" :key="0" v-if="preview">
+              <div class="menu_preview__item"
+                :style="{
+                  color: menu.icon.color,
+                  transform: `rotate(${i * 60}deg) skew(30deg)`
+                }"
+                v-for="(menu, i) in menu" :key="'' + i"
+              >
+                <font-awesome-icon
+                  class="menu_preview__item__icon"
+                  :icon="[menu.icon.type, menu.icon.name]"
+                />
+              </div>
             </div>
-          </div>
+            <div class="icon-color-picker-area"
+              :key="1" v-else
+            >
+              <color-picker
+                v-model="tempColor"
+              />
+              <button
+                class="button button--blue color-submit-button"
+                @click="colorSubmit"
+              >확인</button>
+            </div>
+          </transition>
         </div>
       </div>
     </div>
@@ -110,13 +123,18 @@ export default {
   },
   data () {
     return {
+      preview: true,
       drag: false,
       dragOption: {
         animation: 200,
         group: 'description',
         disabled: false,
         ghostClass: 'ghost'
-      }
+      },
+      tempIndex: 0,
+      tempColor: '',
+      tempIcon: '',
+      tempType: ''
     }
   },
   computed: {
@@ -184,6 +202,11 @@ export default {
       if (!newVal === null && newVal instanceof Object) {
         this.pin = newVal.hex
       }
+    },
+    tempColor (newVal) {
+      if (newVal instanceof Object) {
+        this.tempColor = newVal.hex
+      }
     }
   },
   methods: {
@@ -200,7 +223,18 @@ export default {
       }
     },
     changeIconColor (index) {
-      console.log(index)
+      let targetMenu = this.menu[index]
+      this.tempIndex = index
+      this.tempColor = targetMenu.icon.color
+      this.tempIcon = targetMenu.icon.name
+      this.tempType = targetMenu.icon.type
+      this.preview = false
+    },
+    colorSubmit () {
+      this.menu[this.tempIndex].icon.color = this.tempColor
+      this.menu[this.tempIndex].icon.icon = this.tempIcon
+      this.menu[this.tempIndex].icon.type = this.tempType
+      this.preview = true
     },
     /**
      * @description Set vuex state value
@@ -213,3 +247,26 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+
+.icon-color-picker-area {
+  padding-top: 1.4rem;
+
+  .color-submit-button {
+    margin-top: 1rem;
+  }
+}
+
+.preview-slide-enter-active, .preview-slide-leave-active {
+  transition: .5s;
+}
+
+.preview-slide-enter, .preview-slide-leave-to {
+  -webkit-transform: translateX(300px);
+     -moz-transform: translateX(300px);
+       -o-transform: translateX(300px);
+          transform: translateX(300px);
+  opacity: 0;
+}
+</style>
