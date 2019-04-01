@@ -1,4 +1,4 @@
-import DEFAULT_DATA from '@/data/default.json'
+import { DEFAULT_DATA } from '@/data/default'
 
 const _VERSION = 'v1'
 const IGNORE_STATE_KEY = [

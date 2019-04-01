@@ -85,7 +85,7 @@
                   color: menu.icon.color,
                   transform: `rotate(${i * 60}deg) skew(30deg)`
                 }"
-                v-for="(menu, i) in menu" :key="'' + i"
+                v-for="(menu, i) in menu" :key="i"
               >
                 <font-awesome-icon
                   class="menu_preview__item__icon"

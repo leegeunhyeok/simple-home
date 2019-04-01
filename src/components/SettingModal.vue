@@ -1,6 +1,6 @@
 <template>
   <transition name="fade" mode="out-in">
-    <div id="setting-modal">
+    <div id="setting-modal" @click.stop="">
       <div class="modal__panel">
         <div class="modal__panel__header">
           <span class="modal__panel__header__close"
@@ -31,8 +31,6 @@
 import DefaultSetting from '@/components/DefaultSetting'
 import UserSetting from '@/components/UserSetting'
 
-import DEFAULT_DATA from '@/data/default.json'
-
 export default {
   name: 'setting-modal',
   components: {
@@ -60,16 +58,7 @@ export default {
      * @description Reset option data (default value)
      */
     resetUserData () {
-      for (let key of Object.keys(DEFAULT_DATA.option)) {
-        this.$store.commit('SET_STATE', {
-          key,
-          value: DEFAULT_DATA.option[key]
-        })
-      }
-      this.$store.commit('SET_STATE', {
-        key: 'menu',
-        value: DEFAULT_DATA.menu
-      })
+      this.$store.commit('RESET_DATA')
     }
   }
 }
