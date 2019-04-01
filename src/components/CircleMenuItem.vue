@@ -65,7 +65,7 @@ export default {
     activateCheck () {
       if (this.index === this.currentIndex) {
         let color = this.currentMenuData.icon.color
-        let pinColor = this.option.pinColor || color
+        let pinColor = this.option.pin || color
 
         // Set active style
         this.currentStyle = {
