@@ -25,4 +25,13 @@
       background-color: #cc4f38;
     }
   }
+
+  &.button--blue {
+    background-color: dodgerblue;
+    color: #fff;
+
+    &:hover {
+      background-color: #1873cc;
+    }
+  }
 }
