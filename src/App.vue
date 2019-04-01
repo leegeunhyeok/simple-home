@@ -54,6 +54,9 @@ export default {
     this.$refs.app.addEventListener('touchmove', this.changeDegree)
   },
   methods: {
+    /**
+     * @description Set page title
+     */
     initHome () {
       document.title = this.state.title
     },
@@ -88,8 +91,11 @@ export default {
         this.modalShow = true
       }
     },
+    /**
+     * Modal close
+     */
     onCloseModal () {
-      this.modalShow = this.colorPickerShow = false
+      this.modalShow = false
       this.initHome()
     }
   }
