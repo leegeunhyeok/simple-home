@@ -31,7 +31,7 @@
 import DefaultSetting from '@/components/DefaultSetting'
 import UserSetting from '@/components/UserSetting'
 
-import DEFAULT_DATA from '@/data/default'
+import DEFAULT_DATA from '@/data/default.json'
 
 export default {
   name: 'setting-modal',
