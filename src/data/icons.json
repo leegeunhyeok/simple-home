@@ -111,6 +111,10 @@
     {
       "type": "fas",
       "name": "cog"
+    },
+    {
+      "type": "fas",
+      "name": "faBars"
     }
   ],
   "brand": [
