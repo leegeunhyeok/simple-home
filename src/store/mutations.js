@@ -13,7 +13,11 @@ const SET_STATE = (state, { key, value }) => {
 }
 
 const RESET_DATA = state => {
-  Object.assign(state, JSON.parse(JSON.stringify(DEFAULT_DATA)))
+  let data = JSON.parse(JSON.stringify(DEFAULT_DATA))
+  for (let key of Object.keys(data.option)) {
+    state[key] = data.option[key]
+  }
+  state.menu = data.menu
 }
 
 export default {
