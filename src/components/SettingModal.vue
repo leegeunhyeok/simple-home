@@ -127,22 +127,48 @@
               기능, 아이콘, 색상 등 메뉴를 편집합니다
             </div>
             <div class="controll_area__sub_controll">
-              <drag-list class="menu_list"
-                v-model="menu"
-                tag="ul"
-                v-bind="dragOption"
-                @start="drag = true"
-                @end="drag = false"
-              >
-                <transition-group type="transition"
-                  :name="!drag ? 'flip-list' : null"
+              <div class="controll_area__sub_controll__area">
+                <drag-list class="menu_list"
+                  v-model="menu"
+                  tag="ul"
+                  v-bind="dragOption"
+                  @start="drag = true"
+                  @end="drag = false"
                 >
-                  <li class="menu_list__item"
-                    v-for="(menu, i) in menu" :key="'' + i">
-                    <input v-model="menu.text">
-                  </li>
-                </transition-group>
-              </drag-list>
+                  <transition-group type="transition"
+                    :name="!drag ? 'flip-list' : null"
+                  >
+                    <li class="menu_list__item"
+                      v-for="(menu, i) in menu" :key="'' + i">
+                      <font-awesome-icon icon="bars"/>
+                      <input class="menu_list__item--text" v-model="menu.text">
+                      <div class="menu_list__item--color">
+                        <font-awesome-icon
+                          :icon="[menu.icon.type, menu.icon.name]"
+                          :style="{ color: menu.icon.color }"
+                          @click="$emit('onOpenColorPicker')"
+                        />
+                      </div>
+                    </li>
+                  </transition-group>
+                </drag-list>
+              </div>
+              <div class="controll_area__sub_controll__area">
+                <div class="menu_preview">
+                  <div class="menu_preview__item"
+                    :style="{
+                      color: menu.icon.color,
+                      transform: `rotate(${i * 60}deg) skew(30deg)`
+                    }"
+                    v-for="(menu, i) in menu" :key="'' + i"
+                  >
+                    <font-awesome-icon
+                      class="menu_preview__item__icon"
+                      :icon="[menu.icon.type, menu.icon.name]"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="controll_area">
@@ -517,18 +543,58 @@ export default {
             .vc-chrome {
               margin: auto;
             }
-          }
 
-          .menu_list {
-            display: inline-block;
-            padding: 0;
-            border-radius: 10px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+            .menu_list {
+              display: inline-block;
+              padding: 10px 0;
+              border-radius: 10px;
+              box-shadow: 0 0 5px rgba(0, 0, 0, .3);
 
-            .menu_list__item {
-              cursor: move;
-              padding: 8px 16px;
-              list-style: none;
+              .menu_list__item {
+                cursor: move;
+                padding: 8px 16px;
+                list-style: none;
+
+                .menu_list__item--text {
+                  margin-left: 15px;
+                }
+
+                .menu_list__item--color {
+                  cursor: pointer;
+                  width: 2.5rem;
+                  margin-left: 10px;
+                  font-size: 2rem;
+                  float: right;
+                  text-align: center;
+                }
+              }
+            }
+
+            .menu_preview {
+              position: relative;
+              width: 300px;
+              height: 300px;
+              margin: auto;
+              margin-top: 1.2rem;
+              border-radius: 50%;
+              box-shadow: 0px 0px 5px rgba(0, 0, 0, .2);
+              overflow: hidden;
+
+              .menu_preview__item {
+                position: absolute;
+                width: 150px;
+                height: 150px;
+                transform-origin: 100% 100%;
+                text-align: center;
+                border: 1px solid #eee;
+
+                .menu_preview__item__icon {
+                  margin-top: 5.2rem;
+                  margin-left: 2rem;
+                  font-size: 2rem;
+                  transform: skew(-30deg) rotate(-60deg);
+                }
+              }
             }
           }
         }
