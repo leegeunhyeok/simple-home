@@ -56,7 +56,7 @@
             tag="ul"
             v-bind="dragOption"
             @start="drag = true"
-            @end="drag = false"
+            @end="drag = false;tempIndex = -1"
           >
             <transition-group type="transition"
               :name="!drag ? 'flip-list' : null"
