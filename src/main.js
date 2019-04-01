@@ -32,7 +32,8 @@ import {
   faBaby,
   faLock,
   faCog,
-  faBars
+  faBars,
+  faChevronCircleRight
 } from '@fortawesome/free-solid-svg-icons'
 
 import {
@@ -89,6 +90,7 @@ library.add([
   faLock,
   faCog,
   faBars,
+  faChevronCircleRight,
   faGithub,
   faGitlab,
   faFacebook,
