@@ -225,6 +225,10 @@ export default {
         this.pin = null
       }
     },
+    /**
+     * @description Set color picker value
+     * @param {number} index
+     */
     changeIconColor (index) {
       let targetMenu = this.menu[index]
       this.tempIndex = index
@@ -233,6 +237,9 @@ export default {
       this.tempType = targetMenu.icon.type
       this.preview = false
     },
+    /**
+     * @description Set icon color
+     */
     colorSubmit () {
       this.menu[this.tempIndex].icon.color = this.tempColor
       this.menu[this.tempIndex].icon.icon = this.tempIcon
