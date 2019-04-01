@@ -65,12 +65,6 @@
                 v-for="(menu, i) in menu" :key="'' + i">
                 <font-awesome-icon icon="bars"/>
                 <input class="menu_list__item--text" v-model="menu.text">
-                <div class="menu_list__item--more"
-                  @click.stop="changeIconData(i)"
-                  :class="tempIndex === i ? 'active' : null"
-                >
-                  <font-awesome-icon :icon="['fas', 'chevron-right']"/>
-                </div>
                 <div class="menu_list__item--color"
                   @click.stop="changeIconColor(i)"
                 >
@@ -78,6 +72,13 @@
                     :icon="[menu.icon.type, menu.icon.name]"
                     :style="{ color: menu.icon.color }"
                   />
+                </div>
+                <div class="menu_list__item--detail"
+                  :class="tempIndex === i ? 'active' : null"
+                >
+                  <div class="menu_list__item__controll">
+                    <input v-model="menu.action.url" :disabled="!menu.action.url">
+                  </div>
                 </div>
               </li>
             </transition-group>
@@ -232,22 +233,15 @@ export default {
       }
     },
     /**
-     * @description Set action, icon
-     * @param {number} index
-     */
-    changeIconData (index) {
-      // let targetMenu = this.menu[index]
-      if (this.tempIndex === index) {
-        this.tempIndex = -1
-        return
-      }
-      this.tempIndex = index
-    },
-    /**
      * @description Set color picker value
      * @param {number} index
      */
     changeIconColor (index) {
+      if (this.tempIndex === index) {
+        this.preview = true
+        this.tempIndex = -1
+        return
+      }
       let targetMenu = this.menu[index]
       this.tempIndex = index
       this.tempColor = targetMenu.icon.color

@@ -245,6 +245,30 @@ export default {
                     transform: rotate(90deg);
                   }
                 }
+
+                .menu_list__item--detail {
+                  width: 100%;
+                  padding-right: 3.1rem;
+                  max-height: 0;
+                  overflow: hidden;
+                  -webkit-transition: max-height .3s ease-out;
+                     -moz-transition: max-height .3s ease-out;
+                       -o-transition: max-height .3s ease-out;
+                          transition: max-height .3s ease-out;
+
+                  &.active {
+                    max-height: 500px;
+                    -webkit-transition: max-height .3s ease-in;
+                       -moz-transition: max-height .3s ease-in;
+                         -o-transition: max-height .3s ease-in;
+                            transition: max-height .3s ease-in;
+                  }
+
+                  .menu_list__item__controll {
+                    float: right;
+                    margin: 10px 0;
+                  }
+                }
               }
             }
 
