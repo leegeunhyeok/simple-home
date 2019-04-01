@@ -15,7 +15,7 @@
               상단의 페이지 제목을 지정합니다
             </div>
             <div class="controll_area__switch">
-              <input v-model="tempTitle">
+              <input v-model="title">
             </div>
           </div>
           <div class="controll_area">
@@ -24,7 +24,7 @@
               시계의 상단 여백을 지정합니다
             </div>
             <div class="controll_area__switch">
-              <input v-model="tempClockMargin">
+              <input v-model="clockMargin">
             </div>
           </div>
           <div class="controll_area">
@@ -43,8 +43,8 @@
               오전, 오후 문구를 표시합니다
             </div>
             <div class="controll_area__switch">
-              <div class="checkbox" :class="{ checked: tempApm }"></div>
-              <label style="margin: 0px;" @click="tempApm = !tempApm"></label>
+              <div class="checkbox" :class="{ checked: apm }"></div>
+              <label style="margin: 0px;" @click="apm = !apm"></label>
             </div>
           </div>
           <div class="controll_area">
@@ -53,8 +53,8 @@
               현재 날짜를 표시합니다
             </div>
             <div class="controll_area__switch">
-              <div class="checkbox" :class="{ checked: tempDate }"></div>
-              <label style="margin: 0px;" @click="tempDate = !tempDate"></label>
+              <div class="checkbox" :class="{ checked: date }"></div>
+              <label style="margin: 0px;" @click="date = !date"></label>
             </div>
           </div>
           <div class="controll_area">
@@ -63,8 +63,8 @@
               선택된 메뉴의 미리보기 텍스트를 표시합니다
             </div>
             <div class="controll_area__switch">
-              <div class="checkbox" :class="{ checked: tempShowAlt }"></div>
-              <label style="margin: 0px;" @click="tempShowAlt = !tempShowAlt"></label>
+              <div class="checkbox" :class="{ checked: showAlt }"></div>
+              <label style="margin: 0px;" @click="showAlt = !showAlt"></label>
             </div>
           </div>
           <div class="controll_area">
@@ -73,8 +73,8 @@
               메뉴를 통해 링크 이동시 새 탭으로 띄웁니다
             </div>
             <div class="controll_area__switch">
-              <div class="checkbox" :class="{ checked: tempNewTab }"></div>
-              <label style="margin: 0px;" @click="tempNewTab = !tempNewTab"></label>
+              <div class="checkbox" :class="{ checked: newTab }"></div>
+              <label style="margin: 0px;" @click="newTab = !newTab"></label>
             </div>
           </div>
           <div class="modal__panel__content--header">사용자 설정</div>
@@ -90,7 +90,7 @@
             <div class="controll_area__sub_controll" v-if="!responsivePinCheck">
               <div class="controll_area__sub_controll__area single">
                 <span class="title">기본 핀 색상</span>
-                <color-picker v-model="tempPin"/>
+                <color-picker v-model="pin"/>
               </div>
             </div>
           </div>
@@ -102,11 +102,11 @@
             <div class="controll_area__sub_controll">
               <div class="controll_area__sub_controll__area">
                 <span class="title">배경색</span>
-                <color-picker v-model="tempDefaultBackgroundColor"/>
+                <color-picker v-model="defaultBackgroundColor"/>
               </div>
               <div class="controll_area__sub_controll__area">
                 <span class="title">아이콘색</span>
-                <color-picker v-model="tempDefaultColor"/>
+                <color-picker v-model="defaultColor"/>
               </div>
             </div>
           </div>
@@ -117,7 +117,7 @@
             </div>
             <div class="controll_area__sub_controll">
               <div class="controll_area__sub_controll__area single">
-                <color-picker v-model="tempActiveBackgroundColor"/>
+                <color-picker v-model="activeBackgroundColor"/>
               </div>
             </div>
           </div>
@@ -127,7 +127,22 @@
               기능, 아이콘, 색상 등 메뉴를 편집합니다
             </div>
             <div class="controll_area__sub_controll">
-              Menu customize
+              <drag-list class="menu_list"
+                v-model="menu"
+                tag="ul"
+                v-bind="dragOption"
+                @start="drag = true"
+                @end="drag = false"
+              >
+                <transition-group type="transition"
+                  :name="!drag ? 'flip-list' : null"
+                >
+                  <li class="menu_list__item"
+                    v-for="(menu, i) in menu" :key="i + menu.text">
+                    <input v-model="menu.text">
+                  </li>
+                </transition-group>
+              </drag-list>
             </div>
           </div>
           <div class="controll_area">
@@ -146,91 +161,161 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import draggable from 'vuedraggable'
+
 import { Chrome } from 'vue-color'
 import DEFAULT_DATA from '@/data/default'
 
 export default {
   name: 'setting-modal',
   components: {
-    'color-picker': Chrome
+    'color-picker': Chrome,
+    'drag-list': draggable
   },
   data () {
     return {
-      tempTimeFormat: '',
-      tempClockMargin: 0,
-      tempApm: false,
-      tempDate: false,
-      tempShowAlt: false,
-      tempNewTab: false,
-      tempSpeed: 0,
-      tempTitle: '',
-      tempPin: null,
-      tempDefaultColor: '',
-      tempDefaultBackgroundColor: '',
-      tempActiveBackgroundColor: '',
-      tempMenu: []
+      drag: false,
+      dragOption: {
+        animation: 200,
+        group: 'description',
+        disabled: false,
+        ghostClass: 'ghost'
+      }
     }
   },
   computed: {
     timeFormatCheck () {
-      return this.tempTimeFormat === '12'
+      return this.timeFormat === '12'
     },
     responsivePinCheck () {
       return !this.tempPin
     },
-    ...mapState([
-      'timeFormat',
-      'clockMargin',
-      'apm',
-      'date',
-      'showAlt',
-      'newTab',
-      'speed',
-      'title',
-      'pin',
-      'defaultColor',
-      'defaultBackgroundColor',
-      'activeBackgroundColor',
-      'menu'
-    ])
-  },
-  watch: {
-    tempDefaultColor (newVal) {
-      if (newVal instanceof Object) {
-        this.tempDefaultColor = newVal.hex
+    timeFormat: {
+      get () {
+        return this.$store.state.timeFormat
+      },
+      set (value) {
+        this.setState('timeFormat', value)
       }
     },
-    tempDefaultBackgroundColor (newVal) {
-      if (newVal instanceof Object) {
-        this.tempDefaultBackgroundColor = newVal.hex
+    clockMargin: {
+      get () {
+        return this.$store.state.clockMargin
+      },
+      set (value) {
+        this.setState('clockMargin', value)
       }
     },
-    tempActiveBackgroundColor (newVal) {
-      if (newVal instanceof Object) {
-        this.tempActiveBackgroundColor = newVal.hex
+    apm: {
+      get () {
+        return this.$store.state.apm
+      },
+      set (value) {
+        this.setState('apm', value)
       }
     },
-    tempPin (newVal) {
-      if (!newVal === null && newVal instanceof Object) {
-        this.tempPin = newVal.hex
+    date: {
+      get () {
+        return this.$store.state.date
+      },
+      set (value) {
+        this.setState('date', value)
+      }
+    },
+    showAlt: {
+      get () {
+        return this.$store.state.showAlt
+      },
+      set (value) {
+        this.setState('showAlt', value)
+      }
+    },
+    newTab: {
+      get () {
+        return this.$store.state.newTab
+      },
+      set (value) {
+        this.setState('newTab', value)
+      }
+    },
+    speed: {
+      get () {
+        return this.$store.state.speed
+      },
+      set (value) {
+        this.setState('speed', value)
+      }
+    },
+    title: {
+      get () {
+        return this.$store.state.title
+      },
+      set (value) {
+        this.setState('title', value)
+      }
+    },
+    pin: {
+      get () {
+        return this.$store.state.pin
+      },
+      set (value) {
+        this.setState('pin', value)
+      }
+    },
+    defaultColor: {
+      get () {
+        return this.$store.state.defaultColor
+      },
+      set (value) {
+        this.setState('defaultColor', value)
+      }
+    },
+    defaultBackgroundColor: {
+      get () {
+        return this.$store.state.defaultBackgroundColor
+      },
+      set (value) {
+        this.setState('defaultBackgroundColor', value)
+      }
+    },
+    activeBackgroundColor: {
+      get () {
+        return this.$store.state.activeBackgroundColor
+      },
+      set (value) {
+        this.setState('activeBackgroundColor', value)
+      }
+    },
+    menu: {
+      get () {
+        return this.$store.state.menu
+      },
+      set (value) {
+        this.setState('menu', value)
       }
     }
   },
-  created () {
-    this.tempTimeFormat = this.timeFormat
-    this.tempClockMargin = this.clockMargin
-    this.tempApm = this.apm
-    this.tempDate = this.date
-    this.tempShowAlt = this.showAlt
-    this.tempNewTab = this.newTab
-    this.tempSpeed = this.speed
-    this.tempTitle = this.title
-    this.tempPin = this.pin
-    this.tempDefaultColor = this.defaultColor
-    this.tempDefaultBackgroundColor = this.defaultBackgroundColor
-    this.tempActiveBackgroundColor = this.activeBackgroundColor
-    this.tempMenu = this.menu
+  watch: {
+    defaultColor (newVal) {
+      if (newVal instanceof Object) {
+        this.defaultColor = newVal.hex
+      }
+    },
+    defaultBackgroundColor (newVal) {
+      if (newVal instanceof Object) {
+        this.defaultBackgroundColor = newVal.hex
+      }
+    },
+    activeBackgroundColor (newVal) {
+      if (newVal instanceof Object) {
+        this.activeBackgroundColor = newVal.hex
+      }
+    },
+    pin (newVal) {
+      if (!newVal === null && newVal instanceof Object) {
+        this.pin = newVal.hex
+      }
+    }
   },
   beforeDestroy () {
     this.saveCurrentOption()
@@ -249,24 +334,24 @@ export default {
      * @description Change timeformat value
      */
     changeTimeFormat () {
-      if (this.tempTimeFormat === '24') {
+      if (this.timeFormat === '24') {
         // 24 -> 12
-        this.tempTimeFormat = '12'
+        this.timeFormat = '12'
       } else {
         // 12 -> 24
-        this.tempTimeFormat = '24'
+        this.timeFormat = '24'
       }
     },
     /**
      * @description Change pin option
      */
     changePinOption () {
-      if (this.tempPin === null) {
+      if (this.pin === null) {
         // Default static pin color
-        this.tempPin = '#1E90FF'
+        this.pin = '#1E90FF'
       } else {
         // Responsive pin option
-        this.tempPin = null
+        this.pin = null
       }
     },
     /**
@@ -281,19 +366,6 @@ export default {
      * @description Save current tempDatas
      */
     saveCurrentOption () {
-      this.setState('timeFormat', this.tempTimeFormat)
-      this.setState('clockMargin', this.tempClockMargin)
-      this.setState('apm', this.tempApm)
-      this.setState('date', this.tempDate)
-      this.setState('showAlt', this.tempShowAlt)
-      this.setState('newTab', this.tempNewTab)
-      this.setState('speed', this.tempSpeed)
-      this.setState('title', this.tempTitle)
-      this.setState('pin', this.tempPin)
-      this.setState('defaultColor', this.tempDefaultColor)
-      this.setState('defaultBackgroundColor', this.tempDefaultBackgroundColor)
-      this.setState('activeBackgroundColor', this.tempActiveBackgroundColor)
-      this.setState('menu', this.tempMenu)
       this.$store.dispatch('SAVE_USER_DATA')
     },
     /**
@@ -301,10 +373,9 @@ export default {
      */
     resetUserData () {
       for (let key of Object.keys(DEFAULT_DATA.option)) {
-        let target = key.charAt(0).toUpperCase() + key.slice(1)
-        this['temp' + target] = DEFAULT_DATA.option[key]
+        this[key] = DEFAULT_DATA.option[key]
       }
-      this.tempMenu = DEFAULT_DATA.menu
+      this.menu = DEFAULT_DATA.menu
     }
   }
 }
@@ -446,6 +517,19 @@ export default {
               margin: auto;
             }
           }
+
+          .menu_list {
+            display: inline-block;
+            padding: 0;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+
+            .menu_list__item {
+              cursor: move;
+              padding: 8px 16px;
+              list-style: none;
+            }
+          }
         }
       }
     }
@@ -458,5 +542,10 @@ export default {
 
 .fade-enter, .fade-leave-to {
   opacity: 0;
+}
+
+.ghost {
+  opacity: .5;
+  background: #c8ebfb;
 }
 </style>
