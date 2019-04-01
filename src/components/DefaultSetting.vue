@@ -163,7 +163,7 @@ export default {
      */
     setState (key, value) {
       this.$store.commit('SET_STATE', { key, value })
-    },
+    }
   }
 }
 </script>
