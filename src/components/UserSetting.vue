@@ -115,6 +115,8 @@
 import draggable from 'vuedraggable'
 import { Chrome } from 'vue-color'
 
+import Icons from '@/data/icons.json'
+
 export default {
   name: 'user-setting',
   components: {
@@ -123,6 +125,7 @@ export default {
   },
   data () {
     return {
+      icons: Icons.solid.concat(Icons.brand),
       preview: true,
       drag: false,
       dragOption: {
