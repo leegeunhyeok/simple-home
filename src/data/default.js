@@ -1,6 +1,6 @@
 export default {
   option: {
-    timeFormat: '24',
+    timeFormat: '12',
     clockMargin: 150,
     apm: true,
     date: true,
