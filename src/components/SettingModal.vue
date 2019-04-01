@@ -94,6 +94,11 @@ export default {
     }
 
     @media only screen and (min-width: 1224px) {
+      width: 62%;
+      height: 70%;
+    }
+
+    @media only screen and (min-width: 1600px) {
       width: 50%;
       height: 70%;
     }
