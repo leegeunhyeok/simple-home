@@ -36,7 +36,7 @@ export default {
       defaultStyle: state => {
         return {
           color: state.defaultColor,
-          'background-color': state.defaultBackgroundColor 
+          'background-color': state.defaultBackgroundColor
         }
       }
     })
@@ -65,16 +65,14 @@ export default {
     activateCheck () {
       if (this.index === this.currentIndex) {
         let color = this.currentMenuData.icon.color
+        let pinColor = this.option.pinColor || color
+
         // Set active style
         this.currentStyle = {
           color,
           'background-color': this.option.activeBackgroundColor
         }
-
-        // If responsive pin option is on
-        if (!this.option.pin) {
-          this.$emit('onColorChange', this.currentMenuData.icon.color)
-        }
+        this.$emit('onColorChange', pinColor)
       } else {
         // Set default style
         this.currentStyle = this.defaultStyle

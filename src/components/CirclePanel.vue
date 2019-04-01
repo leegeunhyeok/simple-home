@@ -35,7 +35,7 @@ export default {
       menus: new Array(6),
       currentIndex: 0,
       pinStyle: {
-        backgroundColor: 'dodgerblue'
+        backgroundColor: ''
       }
     }
   },
@@ -55,27 +55,12 @@ export default {
     // Set current index value to vuex
     currentIndex (newValue) {
       this.$store.commit('SET_SELECTED_MENU', newValue)
-    },
-    // Update menu style after option changed
-    option () {
-      console.log('aa')
-      this.updateMenuStyle()
     }
-  },
-  created () {
-    this.updateMenuStyle()
   },
   mounted () {
     this.changeRotateStatus()
   },
   methods: {
-    /**
-     * @description Set menu style
-     */
-    updateMenuStyle () {
-      // Set pin color and default, active style
-      this.pinStyle.backgroundColor = this.option.pin
-    },
     /**
      * @description Change menu rotate degree
      */
