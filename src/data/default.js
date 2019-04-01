@@ -11,7 +11,6 @@ export default {
     pin: null,
     defaultColor: '#555555',
     defaultBackgroundColor: '#FFFFFF',
-    activeColor: '#555555',
     activeBackgroundColor: '#EEEEEE'
   },
   menu: [
