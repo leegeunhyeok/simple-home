@@ -7,7 +7,7 @@ export default {
     showAlt: true,
     newTab: false,
     speed: 2,
-    title: 'Simple Home 🏠',
+    title: 'Simple Home',
     pin: null,
     defaultColor: '#555555',
     defaultBackgroundColor: '#FFFFFF',
