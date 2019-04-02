@@ -127,7 +127,7 @@ html, body {
 
 #app {
   position: relative;
-  font-family: 'NanumSquareRound';
+  font-family: 'NanumSquareRound', 'Courier New', Courier, monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   width: 100%;
