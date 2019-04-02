@@ -298,6 +298,37 @@ export default {
                 }
               }
             }
+
+            .icon-color-picker-area {
+
+              .icon-list {
+                float: right;
+                width: 100%;
+                overflow-x: scroll;
+                overflow-y: hidden;
+                white-space: nowrap;
+                height: 5rem;
+                box-shadow: 0 0 5px rgba(0, 0, 0, .2);
+
+                .icon-list__item {
+                  cursor: pointer;
+                  display: inline-block;
+                  width: 4rem;
+                  height: 4rem;
+                  font-size: 3rem;
+                  text-align: center;
+                  vertical-align: top;
+                  -webkit-transition: .2s;
+                     -moz-transition: .2s;
+                       -o-transition: .2s;
+                          transition: .2s;
+
+                  &:hover {
+                    color: dodgerblue;
+                  }
+                }
+              }
+            }
           }
         }
       }

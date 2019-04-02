@@ -103,9 +103,21 @@
             <div class="icon-color-picker-area"
               :key="1" v-else
             >
-              <color-picker
-                v-model="tempColor"
-              />
+              <div>
+                <div class="icon-list">
+                  <span class="icon-list__item"
+                    v-for="item in icons"
+                    :key="item.name"
+                  >
+                    <font-awesome-icon
+                      :icon="[item.type, item.name]"
+                    />
+                  </span>
+                </div>
+                <color-picker
+                  v-model="tempColor"
+                />
+              </div>
               <button
                 class="button button--blue color-submit-button"
                 @click="colorSubmit"
