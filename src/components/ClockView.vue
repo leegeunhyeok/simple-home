@@ -1,21 +1,25 @@
 <template>
   <div id="clock-panel" :style="{ 'margin-top': `${clockMargin}px` }">
-    <div class="clock-panel__apm time" v-if="stateApm">
-      {{ apm }}
+    <div class="time-area">
+      <div class="clock-panel__apm time" v-if="stateApm">
+        {{ apm }}
+      </div>
+      <div class="clock-panel__hour time">
+        {{ hour }}
+      </div>
+      <div class="time"> : </div>
+      <div class="clock-panel__minute time">
+        {{ minute }}
+      </div>
+      <div class="time"> : </div>
+      <div class="clock-panel__second time">
+        {{ second }}
+      </div>
     </div>
-    <div class="clock-panel__hour time">
-      {{ hour }}
-    </div>
-    <div class="time"> : </div>
-    <div class="clock-panel__minute time">
-      {{ minute }}
-    </div>
-    <div class="time"> : </div>
-    <div class="clock-panel__second time">
-      {{ second }}
-    </div>
-    <div class="clock-panel__date date" v-if="stateDate">
-      {{ `${year}.${month}.${day}` }}
+    <div class="date-area">
+      <div class="clock-panel__date date" v-if="stateDate">
+        {{ `${year}.${month}.${day}` }}
+      </div>
     </div>
   </div>
 </template>
@@ -98,26 +102,56 @@ export default {
 <style lang="scss">
 #clock-panel {
   position: absolute;
+  width: 100%;
   left: 50%;
+  text-align: center;
   -webkit-transform: translateX(-50%);
      -moz-transform: translateX(-50%);
        -o-transform: translateX(-50%);
           transform: translateX(-50%);
 
-  .clock-panel__apm {
-    margin-right: 20px;
-  }
+  .time-area {
+    display: inline-block;
 
-  .time {
-    float: left;
-    color: #fff;
-    font-size: 5rem;
-  }
+    .clock-panel__apm {
+      margin-right: 20px;
+    }
 
-  .date {
-    text-align: center;
-    color: #fff;
-    font-size: 2.2rem;
+    .time {
+      float: left;
+      color: #fff;
+
+      @media only screen and (min-width: 320px) {
+        font-size: 2.5rem;
+      }
+
+      @media only screen and (min-width: 768px) {
+        font-size: 3.6rem;
+      }
+    
+      @media only screen and (min-width: 1224px) {
+        font-size: 5rem;
+      }
+    }
+  }
+  
+  .date-area {
+    .date {
+      text-align: center;
+      color: #fff;
+
+      @media only screen and (min-width: 320px) {
+        font-size: 1.5rem;
+      }
+
+      @media only screen and (min-width: 768px) {
+        font-size: 2rem;
+      }
+    
+      @media only screen and (min-width: 1224px) {
+        font-size: 2.2rem;
+      }
+    }
   }
 }
 </style>
