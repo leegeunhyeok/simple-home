@@ -128,13 +128,13 @@ export default {
       @media only screen and (min-width: 768px) {
         font-size: 3.6rem;
       }
-    
+
       @media only screen and (min-width: 1224px) {
         font-size: 5rem;
       }
     }
   }
-  
+
   .date-area {
     .date {
       text-align: center;
@@ -147,7 +147,7 @@ export default {
       @media only screen and (min-width: 768px) {
         font-size: 2rem;
       }
-    
+
       @media only screen and (min-width: 1224px) {
         font-size: 2.2rem;
       }

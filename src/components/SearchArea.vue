@@ -59,7 +59,6 @@ export default {
     padding: 1rem 2rem;
     font-size: 1rem;
 
-    
     @media only screen and (min-width: 320px) {
       width: 80%;
     }
