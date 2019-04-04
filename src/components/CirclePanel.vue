@@ -1,6 +1,7 @@
 <template>
   <transition name="slide" mode="out-in">
     <div id="circle-wrap">
+      <div class="alt" v-if="showAlt">{{ currnetMenuText }}</div>
       <div id="circle" class="circle-menu" ref="menu">
         <CircleMenuItem
           v-for="(index, i) in menus"
@@ -42,7 +43,11 @@ export default {
   computed: {
     ...mapState({
       option: state => state,
-      menu: state => state.menu
+      menu: state => state.menu,
+      showAlt: state => state.showAlt,
+      currnetMenuText: state => {
+        return state.menu[state.selectedMenuIndex].text
+      }
     })
   },
   watch: {
@@ -102,6 +107,20 @@ export default {
      -moz-transform: translateX(-50%);
        -o-transform: translateX(-50%);
           transform: translateX(-50%);
+
+  .alt {
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    border-radius: 2rem;
+    background-color: rgba(0, 0, 0, .4);
+    padding: 5px 10px;
+    color: #fff;
+    -webkit-transform: translateX(-50%);
+       -moz-transform: translateX(-50%);
+         -o-transform: translateX(-50%);
+            transform: translateX(-50%);
+  }
 
   .circle-menu {
     width: 400px;
