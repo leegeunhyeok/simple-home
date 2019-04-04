@@ -26,7 +26,7 @@
       </div>
       <div class="controll_area__switch">
         <div class="checkbox" :class="{ checked: timeFormatCheck }"></div>
-        <label style="margin: 0px;" @click="changeTimeFormat"></label>
+        <label @click="changeTimeFormat"></label>
       </div>
     </div>
     <div class="controll_area">
@@ -36,7 +36,7 @@
       </div>
       <div class="controll_area__switch">
         <div class="checkbox" :class="{ checked: apm }"></div>
-        <label style="margin: 0px;" @click="apm = !apm"></label>
+        <label @click="apm = !apm"></label>
       </div>
     </div>
     <div class="controll_area">
@@ -46,7 +46,26 @@
       </div>
       <div class="controll_area__switch">
         <div class="checkbox" :class="{ checked: date }"></div>
-        <label style="margin: 0px;" @click="date = !date"></label>
+        <label @click="date = !date"></label>
+      </div>
+    </div>
+    <div class="controll_area">
+      <div class="controll_area__text">
+        <div class="controll_area__text--title">검색창</div>
+        검색창을 표시합니다
+      </div>
+      <div class="controll_area__switch">
+        <div class="checkbox" :class="{ checked: search }"></div>
+        <label @click="search = !search"></label>
+      </div>
+    </div>
+    <div class="controll_area">
+      <div class="controll_area__text">
+        <div class="controll_area__text--title">검색창 상단 여백</div>
+        검색창의 상단 여백을 지정합니다
+      </div>
+      <div class="controll_area__switch">
+        <input v-model="searchMargin">
       </div>
     </div>
     <div class="controll_area">
@@ -56,7 +75,7 @@
       </div>
       <div class="controll_area__switch">
         <div class="checkbox" :class="{ checked: showAlt }"></div>
-        <label style="margin: 0px;" @click="showAlt = !showAlt"></label>
+        <label @click="showAlt = !showAlt"></label>
       </div>
     </div>
     <div class="controll_area">
@@ -66,7 +85,7 @@
       </div>
       <div class="controll_area__switch">
         <div class="checkbox" :class="{ checked: newTab }"></div>
-        <label style="margin: 0px;" @click="newTab = !newTab"></label>
+        <label @click="newTab = !newTab"></label>
       </div>
     </div>
   </div>
@@ -108,6 +127,22 @@ export default {
       },
       set (value) {
         this.setState('date', value)
+      }
+    },
+    search: {
+      get () {
+        return this.$store.state.search
+      },
+      set (value) {
+        this.setState('search', value)
+      }
+    },
+    searchMargin: {
+      get () {
+        return this.$store.state.searchMargin
+      },
+      set (value) {
+        this.setState('searchMargin', value)
       }
     },
     showAlt: {
