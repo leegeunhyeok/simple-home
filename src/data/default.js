@@ -17,6 +17,8 @@ const _data = {
     clockMargin: 150,
     apm: true,
     date: true,
+    search: true,
+    searchMargin: 320,
     showAlt: true,
     newTab: false,
     speed: 2,

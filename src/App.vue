@@ -2,6 +2,7 @@
   <transition name="slide" mode="out-in">
     <div id="app" ref="app">
       <ClockView/>
+      <SearchArea v-if="state.search"/>
       <SettingModal v-if="modalShow"
         @onOpenColorPicker="onOpenColorPicker($event)"
         @onCloseModal="onCloseModal"
@@ -16,13 +17,15 @@ import { mapState } from 'vuex'
 import ClockView from '@/components/ClockView'
 import CirclePanel from '@/components/CirclePanel'
 import SettingModal from '@/components/SettingModal'
+import SearchArea from '@/components/SearchArea'
 
 export default {
   name: 'app',
   components: {
     ClockView,
     CirclePanel,
-    SettingModal
+    SettingModal,
+    SearchArea
   },
   data () {
     return {
