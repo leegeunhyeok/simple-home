@@ -104,19 +104,21 @@
               :key="1" v-else
             >
               <div>
+                <color-picker
+                  v-model="tempColor"
+                />
                 <div class="icon-list">
                   <span class="icon-list__item"
                     v-for="item in icons"
                     :key="item.name"
+                    @click.stop="changeIcon(item.name)"
                   >
                     <font-awesome-icon
+                      :class="{ active: item.name === tempIcon }"
                       :icon="[item.type, item.name]"
                     />
                   </span>
                 </div>
-                <color-picker
-                  v-model="tempColor"
-                />
               </div>
               <button
                 class="button button--blue color-submit-button"
@@ -260,6 +262,16 @@ export default {
       this.tempIcon = targetMenu.icon.name
       this.tempType = targetMenu.icon.type
       this.preview = false
+    },
+    /**
+     * @description Set current menu's icon
+     * @param {number} index
+     */
+    changeIcon (iconName, iconType) {
+      this.menu[this.tempIndex].icon.name = iconName
+      this.menu[this.tempIndex].icon.type = iconType
+      this.tempIcon = iconName
+      this.tempType = iconType
     },
     /**
      * @description Set icon color

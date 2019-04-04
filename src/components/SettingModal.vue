@@ -308,6 +308,8 @@ export default {
                 overflow-y: hidden;
                 white-space: nowrap;
                 height: 5rem;
+                margin-top: 1rem;
+                padding: .5rem;
                 box-shadow: 0 0 5px rgba(0, 0, 0, .2);
 
                 .icon-list__item {
@@ -324,6 +326,10 @@ export default {
                           transition: .2s;
 
                   &:hover {
+                    color: dodgerblue;
+                  }
+
+                  .active {
                     color: dodgerblue;
                   }
                 }
