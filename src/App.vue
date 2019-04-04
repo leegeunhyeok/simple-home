@@ -39,6 +39,7 @@ export default {
     ...mapState({
       state: state => state,
       menu: state => state.menu,
+      newTab: state => state.newTab,
       currentIndex: state => state.selectedMenuIndex
     })
   },
@@ -89,7 +90,11 @@ export default {
 
       // Check action type
       if (action.type === 'url') {
-        location.href = action.url
+        if (this.newTab) {
+          window.open(action.url, '_blank')
+        } else {
+          location.href = action.url
+        }
       } else if (action.type === 'setting') {
         this.modalShow = true
       }
