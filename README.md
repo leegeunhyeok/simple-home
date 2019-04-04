@@ -1,18 +1,78 @@
 # simple-home
-심플한 웹 브라우저 시작페이지  
-[sample](https://codepen.io/leegeunhyeok/pen/qggXQZ) By `Geunhyeok LEE`
+🏠 심플한 웹 브라우저 시작페이지 🏠
 
-## Project setup
+[바로가기](https://geundung.me/home)
+
+## 프로젝트 정보
+누구나 쉽고 간단하게 바로가기 메뉴를 사용할 수 있도록 개발한 시작 페이지 입니다.  
+새로운 네이버 앱의 `그린닷`을 모티브로 하여 고안해낸 디자인 & 기능입니다.  
+  
+`마우스 이동`만으로 메뉴를 선택하고 화면 어디든 `클릭`하여 지정한 링크로 이동할 수 있습니다.  
+또한 아이콘 유형, 색상, 연결 링크 등 다양한 사용자 설정 기능을 제공하고 있습니다.  
+  
+상단의 바로가기 링크를 통해 체험해보고, 홈 화면으로 지정하세요!  
+Developed by [Geunhyeok LEE](https://github.com/leegeunhyeok)
+
+## 미리보기
+<img src="https://user-images.githubusercontent.com/26512984/55566199-2c9f5200-5736-11e9-8612-10f58cdde6ce.png">
+
+<img src="https://user-images.githubusercontent.com/26512984/55565370-a9c9c780-5734-11e9-833d-6ebf984d5d54.png">
+
+<img src="https://user-images.githubusercontent.com/26512984/55565383-afbfa880-5734-11e9-9b9a-c970a1d57a05.png">
+
+## 주요 기능
+
+PWA
+- 오프라인 환경에서도 사용 가능
+- 리소스 로딩 최적화
+- 빠른 로드 속도
+
+기본 설정
+- 메뉴 선택 / 링크 이동
+  - 메뉴 선택: 마우스 이동
+  - 링크 이동: 클릭
+- 웹 페이지 제목 설정
+- 시계 상단 여백 설정
+- 시간 형식 (12/24)
+- 오전/오후 문구 `활성화/비활성화`
+- 현재 날짜 표시 `활성화/비활성화`
+- 검색창 표시 `활성화/비활성화`
+- 검색창 상단 여백 설정
+- 메뉴 미리보기 `활성화/비활성화`
+- 새 탭으로 열기 `활성화/비활성화`
+
+사용자 설정
+- 반응형 핀 색상
+  - 선택된 메뉴의 아이콘 색으로 핀 색상이 변경됩니다.
+- 메뉴 기본 색상
+  - 선택되지 않은 메뉴의 아이콘 색상
+  - 선택되지 않은 메뉴의 배경 색상
+- 활성화 메뉴 배경색
+- 메뉴 사용자화
+  - 메뉴 순서 변경
+  - 메뉴 아이콘 변경
+  - 메뉴 아이콘 색상 변경
+  - 아이콘 변경
+  - 이동할 링크 변경
+
+초기화
+  - 모든 설정을 기본값으로 되돌립니다.
+
+## 개발 정보
+[Vue.js](https://vuejs.org) (with [Vuex](https://vuex.vuejs.org)) 기반의 웹 페이지 입니다.
+
+## 프로젝트 설정
+의존 라이브러리 다운로드
 ```
-npm install
+npm i
 ```
 
-### Compiles and hot-reloads for development
+### 개발을 위한 컴파일 & 핫 리로드
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### 빌드
 ```
 npm run build
 ```
