@@ -22,6 +22,13 @@
             </div>
           </div>
         </div>
+        <div class="modal__panel__dev">
+          Developed by <b class="click" @click="linkTogithub">Geunhyeok LEE</b>
+          <br>
+          <p class="click" @click="linkToGithubSource">
+            <font-awesome-icon :icon="['fab', 'github']"/> Source code
+          </p>
+        </div>
       </div>
     </div>
   </transition>
@@ -59,6 +66,18 @@ export default {
      */
     resetUserData () {
       this.$store.commit('RESET_DATA')
+    },
+    /**
+     * @description Go to developer's github profile
+     */
+    linkTogithub () {
+      window.open('https://github.com/leegeunhyeok', '_blank')
+    },
+    /**
+     * @description Go to github repositiory
+     */
+    linkToGithubSource () {
+      window.open('https://github.com/leegeunhyeok/simple-home', '_blank')
     }
   }
 }
@@ -337,6 +356,16 @@ export default {
             }
           }
         }
+      }
+    }
+
+    .modal__panel__dev {
+      color: #aeaeae;
+      margin-bottom: 1rem;
+      text-align: center;
+
+      .click {
+        cursor: pointer;
       }
     }
   }
