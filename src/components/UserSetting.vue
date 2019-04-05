@@ -111,7 +111,7 @@
                   <span class="icon-list__item"
                     v-for="item in icons"
                     :key="item.name"
-                    @click.stop="changeIcon(item.name)"
+                    @click.stop="changeIcon(item.name, item.type)"
                   >
                     <font-awesome-icon
                       :class="{ active: item.name === tempIcon }"
