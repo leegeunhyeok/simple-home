@@ -1,6 +1,7 @@
 <template>
   <div id="search-area" ref="search">
-    <input v-model="text"
+    <input ref="input"
+      v-model="text"
       @click.stop=""
       @keydown.enter="search"
     >
@@ -23,6 +24,7 @@ export default {
   }),
   mounted () {
     this.$refs.search.style.marginTop = `${this.margin}px`
+    this.$refs.input.focus()
   },
   methods: {
     /**
