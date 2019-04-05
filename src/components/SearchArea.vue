@@ -2,7 +2,6 @@
   <div id="search-area" ref="search">
     <input v-model="text"
       @click.stop=""
-      @mousemove.stop=""
       @keydown.enter="search"
     >
   </div>
