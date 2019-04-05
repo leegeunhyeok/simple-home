@@ -1,7 +1,7 @@
 # simple-home
 🏠 심플한 웹 브라우저 시작페이지 🏠
 
-[바로가기](https://geundung.me/home)
+[바로가기](https://geundung.me)
 
 ## 프로젝트 정보
 누구나 쉽고 간단하게 바로가기 메뉴를 사용할 수 있도록 개발한 시작 페이지 입니다.  
