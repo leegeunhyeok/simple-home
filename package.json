@@ -1,6 +1,6 @@
 {
   "name": "simple-home",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -11,6 +11,7 @@
     "@fortawesome/free-brands-svg-icons": "^5.8.1",
     "@fortawesome/free-solid-svg-icons": "^5.8.1",
     "@fortawesome/vue-fontawesome": "^0.1.6",
+    "register-service-worker": "^1.6.2",
     "vue": "^2.6.6",
     "vue-color": "^2.7.0",
     "vuedraggable": "^2.20.0",
