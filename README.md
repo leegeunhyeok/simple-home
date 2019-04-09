@@ -58,6 +58,9 @@ PWA
 
 초기화
   - 모든 설정을 기본값으로 되돌립니다.
+  
+## 기능 제안 및 오류 제보
+[여기](https://github.com/leegeunhyeok/simple-home/issues)에 이슈를 남겨주세요!
 
 ## 개발 정보
 [Vue.js](https://vuejs.org) (with [Vuex](https://vuex.vuejs.org)) 기반의 웹 페이지 입니다.
