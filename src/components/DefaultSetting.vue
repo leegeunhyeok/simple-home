@@ -97,6 +97,16 @@
         <label @click="newTab = !newTab"></label>
       </div>
     </div>
+    <div class="controll_area">
+      <div class="controll_area__text">
+        <div class="controll_area__text--title">사용량 정보 전송</div>
+        Simple Home 개선을 위해 사용량 정보를 서버로 전송합니다 (유저 데이터 제외)
+      </div>
+      <div class="controll_area__switch">
+        <div class="checkbox" :class="{ checked: send }"></div>
+        <label @click="send = !send"></label>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -176,6 +186,14 @@ export default {
       },
       set (value) {
         this.setState('newTab', value)
+      }
+    },
+    send: {
+      get () {
+        return this.$store.state.send
+      },
+      set (value) {
+        this.setState('send', value)
       }
     },
     title: {

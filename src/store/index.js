@@ -22,6 +22,7 @@ export default new Vuex.Store({
     speed: 2,
     title: 'Simple Home 🏠',
     pin: null,
+    send: true,
     defaultColor: '#555555',
     defaultBackgroundColor: '#FFFFFF',
     activeBackgroundColor: '#EEEEEE',
