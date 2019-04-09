@@ -178,14 +178,6 @@ export default {
         this.setState('newTab', value)
       }
     },
-    speed: {
-      get () {
-        return this.$store.state.speed
-      },
-      set (value) {
-        this.setState('speed', value)
-      }
-    },
     title: {
       get () {
         return this.$store.state.title
