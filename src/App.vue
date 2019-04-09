@@ -1,6 +1,11 @@
 <template>
   <transition name="slide" mode="out-in">
     <div id="app" ref="app">
+      <AgreeAlert
+        v-if="!asked"
+        @onAllow="agree(true)"
+        @onClose="agree(false)"
+      />
       <ClockView/>
       <SearchArea v-if="state.search"/>
       <SettingModal v-if="modalShow"
@@ -18,6 +23,7 @@ import ClockView from '@/components/ClockView'
 import CirclePanel from '@/components/CirclePanel'
 import SettingModal from '@/components/SettingModal'
 import SearchArea from '@/components/SearchArea'
+import AgreeAlert from '@/components/AgreeAlert'
 
 export default {
   name: 'app',
@@ -25,19 +31,23 @@ export default {
     ClockView,
     CirclePanel,
     SettingModal,
-    SearchArea
+    SearchArea,
+    AgreeAlert
   },
   data () {
     return {
       // Menu rotate degree
       degree: 0,
       // Modal show flag
-      modalShow: false
+      modalShow: false,
+      // Send data allow/deny flag
+      asked: true
     }
   },
   computed: {
     ...mapState({
       state: state => state,
+      send: state => state.send,
       menu: state => state.menu,
       newTab: state => state.newTab,
       currentIndex: state => state.selectedMenuIndex
@@ -47,6 +57,10 @@ export default {
     // Get user data and set page title
     this.$store.dispatch('LOAD_USER_DATA')
     this.$store.dispatch('LOAD_MENU_DATA')
+    this.asked = JSON.parse(localStorage.getItem('asked'))
+    if (this.asked && this.send) {
+      this.sendData()
+    }
     this.initHome()
   },
   mounted () {
@@ -58,6 +72,15 @@ export default {
     this.$refs.app.addEventListener('touchmove', this.changeDegree)
   },
   methods: {
+    /**
+     * @description Sent usage data to server
+     */
+    sendData () {
+      this.$http.post('/connect')
+        .catch(e => {
+          console.error(`Can't send data: ${e}`)
+        })
+    },
     /**
      * @description Set page title
      */
@@ -105,6 +128,21 @@ export default {
     onCloseModal () {
       this.modalShow = false
       this.initHome()
+    },
+    /**
+     * @description Send data to server agree/deny
+     */
+    agree (allow) {
+      localStorage.setItem('asked', 'true')
+      this.$store.commit('SET_STATE', {
+        key: 'send',
+        value: allow
+      })
+      this.asked = true
+
+      if (allow) {
+        this.sendData()
+      }
     }
   }
 }
