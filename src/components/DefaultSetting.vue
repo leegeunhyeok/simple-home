@@ -51,6 +51,15 @@
     </div>
     <div class="controll_area">
       <div class="controll_area__text">
+        <div class="controll_area__text--title">마우스 감도</div>
+        메뉴 조작 마우스 감도를 설정합니다 (1 ~ 3)
+      </div>
+      <div class="controll_area__switch">
+        <input type="number" min="1" max="3" v-model.number="speed">
+      </div>
+    </div>
+    <div class="controll_area">
+      <div class="controll_area__text">
         <div class="controll_area__text--title">검색창</div>
         검색창을 표시합니다
       </div>
@@ -127,6 +136,14 @@ export default {
       },
       set (value) {
         this.setState('date', value)
+      }
+    },
+    speed: {
+      get () {
+        return this.$store.state.speed
+      },
+      set (value) {
+        this.setState('speed', value)
       }
     },
     search: {
