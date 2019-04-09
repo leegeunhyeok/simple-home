@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import store from './store/index'
 import './registerServiceWorker'
+import axios from 'axios'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
@@ -116,6 +117,7 @@ library.add([
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false
+Vue.prototype.$http = axios
 
 new Vue({
   store,
