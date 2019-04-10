@@ -25,6 +25,8 @@ import SettingModal from '@/components/SettingModal'
 import SearchArea from '@/components/SearchArea'
 import AgreeAlert from '@/components/AgreeAlert'
 
+import EventManager from '@/event/EventManager'
+
 export default {
   name: 'app',
   components: {
@@ -36,6 +38,7 @@ export default {
   },
   data () {
     return {
+      manager: new EventManager(),
       // Menu rotate degree
       degree: 0,
       // Modal show flag
@@ -68,10 +71,16 @@ export default {
     this.setScreenWidth()
     window.addEventListener('resize', this.setScreenWidth)
     this.$refs.app.addEventListener('click', this.activeSelectedMenu)
-    this.$refs.app.addEventListener('mousemove', this.changeDegree)
-    this.$refs.app.addEventListener('touchmove', this.changeDegree)
+    this.registEventListener()
   },
   methods: {
+    /**
+     * @description Bind event listener to $refs.app
+     */
+    registEventListener () {
+      // TODO: MouseMove, MouseWheel, KeyDown, etc..
+      this.$refs.app.addEventListener('mousemove', this.manager.broker.call(this).bind(this))
+    },
     /**
      * @description Sent usage data to server
      */
