@@ -79,7 +79,7 @@ export default {
      */
     registEventListener () {
       // TODO: MouseMove, MouseWheel, KeyDown, etc..
-      this.$refs.app.addEventListener('mousemove', this.manager.broker.call(this).bind(this))
+      this.$refs.app.addEventListener('mousemove', this.manager.broker.call(this))
     },
     /**
      * @description Sent usage data to server

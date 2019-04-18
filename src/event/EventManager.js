@@ -6,7 +6,7 @@ class EventManager {
    */
   broker () {
     // TODO: Event type check
-    return new MouseMoveEvent().changeDegree
+    return new MouseMoveEvent().changeDegree.bind(this)
   }
 }
 
