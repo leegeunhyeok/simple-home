@@ -79,7 +79,8 @@ export default {
      */
     registEventListener () {
       // TODO: MouseMove, MouseWheel, KeyDown, etc..
-      this.$refs.app.addEventListener('mousemove', this.manager.broker.call(this))
+      // this.$refs.app.addEventListener('mousemove', this.manager.broker.call(this))
+      this.$refs.app.addEventListener('mousewheel', this.manager.broker.call(this))
     },
     /**
      * @description Sent usage data to server
@@ -92,7 +93,7 @@ export default {
     },
     /**
      * @description Set page title
-     */
+    */
     initHome () {
       document.title = this.state.title
     },

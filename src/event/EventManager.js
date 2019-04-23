@@ -1,4 +1,4 @@
-import MouseMoveEvent from '@/event/MouseMoveEvent'
+import MouseWheelEvent from '@/event/MouseWheelEvent'
 
 class EventManager {
   /**
@@ -6,7 +6,7 @@ class EventManager {
    */
   broker () {
     // TODO: Event type check
-    return new MouseMoveEvent().changeDegree.bind(this)
+    return new MouseWheelEvent().changeDegree.bind(this)
   }
 }
 
