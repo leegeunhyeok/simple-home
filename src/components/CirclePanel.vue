@@ -123,6 +123,7 @@ export default {
   }
 
   .circle-menu {
+    position: relative;
     width: 400px;
     height: 400px;
     background-color: #fff;

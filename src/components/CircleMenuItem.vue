@@ -52,8 +52,10 @@ export default {
   },
   mounted () {
     // Dynamic style apply (rotate degree)
-    let rotateDegree = this.index * 60
-    this.$refs.menu.style.transform = `rotate(${rotateDegree}deg) skew(30deg)`
+    const rotateDegree = this.index * 60
+    const style = `rotate(${rotateDegree}deg) skew(30deg)`
+    this.$refs.menu.style.webkitTransform = style
+    this.$refs.menu.style.transform = style
 
     // Checking activate status
     this.activateCheck()
