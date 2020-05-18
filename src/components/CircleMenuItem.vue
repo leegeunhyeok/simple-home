@@ -85,10 +85,20 @@ export default {
 </script>
 
 <style lang="scss">
+body[data-theme=light] {
+  .circle-menu-item {
+    background-color: #fff;
+  }
+}
+
+body[data-theme=dark] {
+  .circle-menu-item {
+    background-color: #2f373d;
+  }
+}
 
 .circle-menu-item {
   position: absolute;
-  background-color: #fff;
   width: 200px;
   height: 200px;
   transform-origin: 100% 100%;

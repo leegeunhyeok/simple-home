@@ -97,6 +97,32 @@ export default {
 
 <style lang="scss">
 
+body[data-theme=light] {
+  #circle-wrap {
+    .alt {
+      color: #fff;
+      background-color: rgba(0, 0, 0, .4);
+    }
+
+    .circle-menu {
+      background-color: #fff;
+    }
+  }
+}
+
+body[data-theme=dark] {
+  #circle-wrap {
+    .alt {
+      color: #2f373d;
+      background-color: rgba(255, 255, 255, .4);
+    }
+
+    .circle-menu {
+      background-color: #1c2024;
+    }
+  }
+}
+
 #circle-wrap {
   position: absolute;
   bottom: -200px;
@@ -113,9 +139,7 @@ export default {
     top: -50px;
     left: 50%;
     border-radius: 2rem;
-    background-color: rgba(0, 0, 0, .4);
     padding: 5px 10px;
-    color: #fff;
     -webkit-transform: translateX(-50%);
        -moz-transform: translateX(-50%);
          -o-transform: translateX(-50%);
@@ -126,7 +150,6 @@ export default {
     position: relative;
     width: 400px;
     height: 400px;
-    background-color: #fff;
     border-radius: 50%;
     box-shadow: 0px 0px 3px rgba(0, 0, 0, .2);
     overflow: hidden;

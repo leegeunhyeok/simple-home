@@ -56,6 +56,12 @@ export default {
   mounted () {
     // Get screen size and regist event listeners after mounted
     this.setScreenWidth()
+    window.matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', e => {
+        document.body.dataset.theme = e.matches && this.state.darkmode
+          ? 'dark' : 'light'
+      })
+
     window.addEventListener('resize', this.setScreenWidth)
     this.$refs.app.addEventListener('click', this.activeSelectedMenu)
     this.registEventListener()
@@ -84,6 +90,17 @@ export default {
     */
     initHome () {
       document.title = this.state.title
+
+      if (
+        this.state.darkmode &&
+        window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches
+      ) {
+        document.body.dataset.theme = 'dark'
+      } else {
+        document.body.dataset.theme = 'light'
+      }
+
       open().then(db => getImage(db))
         .then(bg => {
           if (bg.type === 'image') {
@@ -91,6 +108,7 @@ export default {
             this.$refs.app.style.backgroundImage = `url('${bg.data}')`
             this.$refs.app.style.backgroundRepeat = 'no-repeat'
             this.$refs.app.style.backgroundPosition = 'center'
+            this.$refs.app.style.backgroundSize = 'cover'
           } else if (bg.type === 'style') {
             this.$refs.app.style = bg.data
           } else {

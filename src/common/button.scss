@@ -1,3 +1,29 @@
+body[data-theme=light] {
+  .button {
+    &.button--default {
+      background-color: #fff;
+      color: #555;
+  
+      &:hover {
+        background-color: #ccc;
+      }
+    }
+  }
+}
+
+body[data-theme=dark] {
+  .button {
+    &.button--default {
+      background-color: #2f373d;
+      color: #fff;
+  
+      &:hover {
+        background-color: #191d20;
+      }
+    }
+  }
+}
+
 .button {
   cursor: pointer;
   border: none;
@@ -7,15 +33,6 @@
      -moz-transition: .3s;
        -o-transition: .3s;
           transition: .3s;
-
-  &.button--default {
-    background-color: #fff;
-    color: #555;
-
-    &:hover {
-      background-color: #ccc;
-    }
-  }
 
   &.button--red {
     background-color: tomato;

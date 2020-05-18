@@ -100,6 +100,38 @@ export default {
 </script>
 
 <style lang="scss">
+body[data-theme=light] {
+  #clock-panel {
+    .time-area {
+      .time {
+        color: #fff;
+      }
+    }
+
+    .date-area {
+      .date {
+        color: #fff;
+      }
+    }
+  }
+}
+
+body[data-theme=dark] {
+  #clock-panel {
+    .time-area {
+      .time {
+        color: #2f373d;
+      }
+    }
+
+    .date-area {
+      .date {
+        color: #2f373d;
+      }
+    }
+  }
+}
+
 #clock-panel {
   position: absolute;
   width: 100%;
@@ -119,7 +151,6 @@ export default {
 
     .time {
       float: left;
-      color: #fff;
 
       @media only screen and (min-width: 320px) {
         font-size: 2.5rem;
@@ -138,7 +169,6 @@ export default {
   .date-area {
     .date {
       text-align: center;
-      color: #fff;
 
       @media only screen and (min-width: 320px) {
         font-size: 1.5rem;

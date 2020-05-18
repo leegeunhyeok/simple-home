@@ -25,6 +25,15 @@
     </div>
     <div class="controll_area">
       <div class="controll_area__text">
+        <div class="controll_area__text--title">자동 다크모드 감지</div>
+        다크모드 여부에 따라 테마를 변경합니다
+      </div>
+      <div class="controll_area__switch">
+        <input v-model="darkmode">
+      </div>
+    </div>
+    <div class="controll_area">
+      <div class="controll_area__text">
         <div class="controll_area__text--title">시계 상단 여백</div>
         시계의 상단 여백을 지정합니다
       </div>
@@ -207,6 +216,14 @@ export default {
       },
       set (value) {
         this.setState('title', value)
+      }
+    },
+    darkmode: {
+      get () {
+        return this.$store.state.darkmode
+      },
+      set (value) {
+        this.setState('darkmode', value)
       }
     }
   },

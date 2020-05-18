@@ -21,6 +21,7 @@ export default new Vuex.Store({
     newTab: false,
     speed: 2,
     title: 'Simple Home 🏠',
+    darkmode: false,
     pin: null,
     send: true,
     defaultColor: '#555555',
