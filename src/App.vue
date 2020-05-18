@@ -19,6 +19,8 @@ import SearchArea from '@/components/SearchArea'
 
 import EventManager from '@/event/EventManager'
 
+import { open, getImage } from '@/db'
+
 export default {
   name: 'app',
   components: {
@@ -34,8 +36,6 @@ export default {
       degree: 0,
       // Modal show flag
       modalShow: false,
-      // Send data allow/deny flag
-      asked: true,
       live: true
     }
   },
@@ -52,11 +52,6 @@ export default {
     // Get user data and set page title
     this.$store.dispatch('LOAD_USER_DATA')
     this.$store.dispatch('LOAD_MENU_DATA')
-    this.asked = JSON.parse(localStorage.getItem('asked'))
-    if (this.asked && this.send) {
-      this.sendData()
-    }
-    this.initHome()
   },
   mounted () {
     // Get screen size and regist event listeners after mounted
@@ -64,6 +59,7 @@ export default {
     window.addEventListener('resize', this.setScreenWidth)
     this.$refs.app.addEventListener('click', this.activeSelectedMenu)
     this.registEventListener()
+    this.initHome()
   },
   methods: {
     /**
@@ -88,6 +84,20 @@ export default {
     */
     initHome () {
       document.title = this.state.title
+      open().then(db => getImage(db))
+        .then(bg => {
+          if (bg.type === 'image') {
+            // data:image/png;base64,
+            this.$refs.app.style.backgroundImage = `url('${bg.data}')`
+            this.$refs.app.style.backgroundRepeat = 'no-repeat'
+            this.$refs.app.style.backgroundPosition = 'center'
+          } else if (bg.type === 'style') {
+            this.$refs.app.style = bg.data
+          } else {
+            // None
+          }
+        })
+        .catch(console.error)
     },
     /**
      * @description Get current window size and store to vuex

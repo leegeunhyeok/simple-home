@@ -12,6 +12,19 @@
     </div>
     <div class="controll_area">
       <div class="controll_area__text">
+        <div class="controll_area__text--title">배경화면</div>
+        배경화면 이미지를 지정합니다
+      </div>
+      <div class="controll_area__switch">
+        <input
+          type="file"
+          accept="image/gif, image/jpeg, image/png"
+          @change="bgFile"
+        >
+      </div>
+    </div>
+    <div class="controll_area">
+      <div class="controll_area__text">
         <div class="controll_area__text--title">시계 상단 여백</div>
         시계의 상단 여백을 지정합니다
       </div>
@@ -101,6 +114,8 @@
 </template>
 
 <script>
+import { open, setImage } from '@/db'
+
 export default {
   computed: {
     timeFormatCheck () {
@@ -196,6 +211,20 @@ export default {
     }
   },
   methods: {
+    bgFile (event) {
+      if (!event.target.files[0]) {
+        return
+      }
+
+      const fr = new FileReader()
+      fr.addEventListener('load', e => {
+        open().then(db => {
+          return setImage(db, e.target.result, 'image')
+        })
+          .catch(console.error)
+      })
+      fr.readAsDataURL(event.target.files[0])
+    },
     /**
      * @description Change timeformat value
      */
@@ -219,3 +248,8 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+input[type=file] {
+  width: 155px;
+}
+</style>
