@@ -1,20 +1,13 @@
 <template>
-  <transition name="slide" mode="out-in">
-    <div id="app" ref="app">
-      <AgreeAlert
-        v-if="!asked"
-        @onAllow="agree(true)"
-        @onClose="agree(false)"
-      />
-      <ClockView/>
-      <SearchArea v-if="state.search"/>
-      <SettingModal v-if="modalShow"
-        @onOpenColorPicker="onOpenColorPicker($event)"
-        @onCloseModal="onCloseModal"
-      />
-      <CirclePanel v-else :degree="degree"/>
-    </div>
-  </transition>
+  <div id="app" ref="app" v-if="live">
+    <ClockView/>
+    <SearchArea v-if="state.search"/>
+    <SettingModal v-if="modalShow"
+      @onOpenColorPicker="onOpenColorPicker($event)"
+      @onCloseModal="onCloseModal"
+    />
+    <CirclePanel v-else :degree="degree"/>
+  </div>
 </template>
 
 <script>
@@ -23,7 +16,6 @@ import ClockView from '@/components/ClockView'
 import CirclePanel from '@/components/CirclePanel'
 import SettingModal from '@/components/SettingModal'
 import SearchArea from '@/components/SearchArea'
-import AgreeAlert from '@/components/AgreeAlert'
 
 import EventManager from '@/event/EventManager'
 
@@ -33,8 +25,7 @@ export default {
     ClockView,
     CirclePanel,
     SettingModal,
-    SearchArea,
-    AgreeAlert
+    SearchArea
   },
   data () {
     return {
@@ -44,7 +35,8 @@ export default {
       // Modal show flag
       modalShow: false,
       // Send data allow/deny flag
-      asked: true
+      asked: true,
+      live: true
     }
   },
   computed: {
@@ -124,6 +116,7 @@ export default {
       // Check action type
       if (action.type === 'url') {
         if (this.newTab) {
+          this.live = false
           window.open(action.url, '_blank')
         } else {
           location.href = action.url
@@ -138,21 +131,6 @@ export default {
     onCloseModal () {
       this.modalShow = false
       this.initHome()
-    },
-    /**
-     * @description Send data to server agree/deny
-     */
-    agree (allow) {
-      localStorage.setItem('asked', 'true')
-      this.$store.commit('SET_STATE', {
-        key: 'send',
-        value: allow
-      })
-      this.asked = true
-
-      if (allow) {
-        this.sendData()
-      }
     }
   }
 }

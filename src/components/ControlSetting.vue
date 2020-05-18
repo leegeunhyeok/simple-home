@@ -130,38 +130,6 @@ export default {
         this.setState('apm', value)
       }
     },
-    date: {
-      get () {
-        return this.$store.state.date
-      },
-      set (value) {
-        this.setState('date', value)
-      }
-    },
-    speed: {
-      get () {
-        return this.$store.state.speed
-      },
-      set (value) {
-        this.setState('speed', value)
-      }
-    },
-    search: {
-      get () {
-        return this.$store.state.search
-      },
-      set (value) {
-        this.setState('search', value)
-      }
-    },
-    searchMargin: {
-      get () {
-        return this.$store.state.searchMargin
-      },
-      set (value) {
-        this.setState('searchMargin', value)
-      }
-    },
     showAlt: {
       get () {
         return this.$store.state.showAlt
@@ -169,45 +137,9 @@ export default {
       set (value) {
         this.setState('showAlt', value)
       }
-    },
-    newTab: {
-      get () {
-        return this.$store.state.newTab
-      },
-      set (value) {
-        this.setState('newTab', value)
-      }
-    },
-    send: {
-      get () {
-        return this.$store.state.send
-      },
-      set (value) {
-        this.setState('send', value)
-      }
-    },
-    title: {
-      get () {
-        return this.$store.state.title
-      },
-      set (value) {
-        this.setState('title', value)
-      }
     }
   },
   methods: {
-    /**
-     * @description Change timeformat value
-     */
-    changeTimeFormat () {
-      if (this.timeFormat === '24') {
-        // 24 -> 12
-        this.timeFormat = '12'
-      } else {
-        // 12 -> 24
-        this.timeFormat = '24'
-      }
-    },
     /**
      * @description Set vuex state value
      * @param {string} key
